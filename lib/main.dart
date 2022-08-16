@@ -1,10 +1,7 @@
-import 'package:arc/arc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:science_hall/presentation/main/main_page.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
-import 'package:science_hall/route/app_route.dart';
 
 import 'di_container.dart' as dc;
 
@@ -23,13 +20,19 @@ class App extends ConsumerWidget {
     final themeMode = ref.watch(appThemeModeProvider);
     final appRouter = ref.watch(appRouterProvider);
 
-    return MaterialApp.router(
-      theme: theme.data,
-      darkTheme: AppTheme.light().data,
-      themeMode: themeMode,
-      routeInformationParser: appRouter.defaultRouteParser(),
-      routerDelegate: appRouter.delegate(),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: false,
+      builder: (context, child) {
+        return MaterialApp.router(
+          theme: theme.data,
+          darkTheme: AppTheme.light().data,
+          themeMode: themeMode,
+          routeInformationParser: appRouter.defaultRouteParser(),
+          routerDelegate: appRouter.delegate(),
+        );
+      },
     );
-
   }
 }
