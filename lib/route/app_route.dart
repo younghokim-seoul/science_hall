@@ -11,6 +11,7 @@ export 'app_route.gr.dart';
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(
+      path: '/',
       page: MainPage,
       initial: true,
       children: <AutoRoute>[

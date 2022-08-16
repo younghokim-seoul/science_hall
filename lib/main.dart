@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
+import 'package:science_hall/route/app_route.dart';
 
 import 'di_container.dart' as dc;
 
@@ -20,6 +21,8 @@ class App extends ConsumerWidget {
     final themeMode = ref.watch(appThemeModeProvider);
     final appRouter = ref.watch(appRouterProvider);
 
+   
+
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -32,6 +35,7 @@ class App extends ConsumerWidget {
           routeInformationParser: appRouter.defaultRouteParser(),
           routerDelegate: appRouter.delegate(),
         );
+
       },
     );
   }

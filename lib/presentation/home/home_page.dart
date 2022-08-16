@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:science_hall/gen/assets.gen.dart';
+import 'package:science_hall/presentation/home/quick_item.dart';
+import 'package:science_hall/util/dev_log.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,26 +14,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    Log.i("_HomePageState build");
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            _header,
-          ],
-        ),
+      body: Column(
+        children: [_header, _quickMenu],
       ),
     );
   }
 }
 
-Widget _header = SizedBox(
+Widget _header = Container(
+  color: Colors.black,
   height: 300.h,
   child: Stack(
     children: [
-      // AspectRatio(
-      //   aspectRatio: 2 / 5,
-      //   child: Assets.images.mainTop.image(),
-      // ),
       Positioned.fill(child: Assets.images.mainTop.image(fit: BoxFit.fill)),
       Positioned(
         top: 0,
@@ -43,5 +39,29 @@ Widget _header = SizedBox(
         ),
       )
     ],
+  ),
+);
+
+Widget _quickMenu = Expanded(
+  child: Container(
+    color: const Color(0xfff0f0f0),
+    child: ListView(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      children: [
+        QuickItem(
+            img: Assets.images.mainQuick01,
+            title: "관람안내",
+            onTab: () => {}),
+        QuickItem(
+            img: Assets.images.mainQuick02,
+            title: "전시관 안내",
+            onTab: () => {}),
+        QuickItem(
+            img: Assets.images.mainQuick03,
+            title: "오시는길",
+            onTab: () => {})
+      ],
+    ),
   ),
 );
