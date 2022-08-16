@@ -58,17 +58,17 @@ Widget _quickMenu(BuildContext context) => Expanded(
                 img: Assets.images.mainQuick01,
                 title: "관람안내",
                 onTab: () =>
-                    {context.router.push(const VisitingInformationRoute())}),
+                    context.router.push(const VisitingInformationRoute())),
             QuickItem(
                 img: Assets.images.mainQuick02,
                 title: "전시관 안내",
                 onTab: () =>
-                    {context.router.push(const ExhibitionInformationRoute())}),
+                    context.router.push(const ExhibitionInformationRoute())),
             QuickItem(
                 img: Assets.images.mainQuick03,
                 title: "오시는길",
                 onTab: () =>
-                    {context.router.push(const DirectionsInformationRoute())})
+                    context.router.push(const DirectionsInformationRoute())),
           ],
         ),
       ),

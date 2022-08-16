@@ -18,6 +18,7 @@ class AppTextTheme {
     const _normalRegular = TextStyle(
       fontWeight: FontWeight.w400,
       height: 1.5,
+      color: Colors.black,
       leadingDistribution: TextLeadingDistribution.even,
     );
     return AppTextTheme._(
