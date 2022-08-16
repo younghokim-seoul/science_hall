@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:science_hall/gen/assets.gen.dart';
 import 'package:science_hall/presentation/home/quick_item.dart';
+import 'package:science_hall/route/app_route.dart';
 import 'package:science_hall/util/dev_log.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +19,10 @@ class _HomePageState extends State<HomePage> {
     Log.i("_HomePageState build");
     return Scaffold(
       body: Column(
-        children: [_header, _quickMenu],
+        children: [
+          _header,
+          _quickMenu(context),
+        ],
       ),
     );
   }
@@ -42,26 +47,29 @@ Widget _header = Container(
   ),
 );
 
-Widget _quickMenu = Expanded(
-  child: Container(
-    color: const Color(0xfff0f0f0),
-    child: ListView(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      children: [
-        QuickItem(
-            img: Assets.images.mainQuick01,
-            title: "관람안내",
-            onTab: () => {}),
-        QuickItem(
-            img: Assets.images.mainQuick02,
-            title: "전시관 안내",
-            onTab: () => {}),
-        QuickItem(
-            img: Assets.images.mainQuick03,
-            title: "오시는길",
-            onTab: () => {})
-      ],
-    ),
-  ),
-);
+Widget _quickMenu(BuildContext context) => Expanded(
+      child: Container(
+        color: const Color(0xfff0f0f0),
+        child: ListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            QuickItem(
+                img: Assets.images.mainQuick01,
+                title: "관람안내",
+                onTab: () =>
+                    {context.router.push(const VisitingInformationRoute())}),
+            QuickItem(
+                img: Assets.images.mainQuick02,
+                title: "전시관 안내",
+                onTab: () =>
+                    {context.router.push(const ExhibitionInformationRoute())}),
+            QuickItem(
+                img: Assets.images.mainQuick03,
+                title: "오시는길",
+                onTab: () =>
+                    {context.router.push(const DirectionsInformationRoute())})
+          ],
+        ),
+      ),
+    );
