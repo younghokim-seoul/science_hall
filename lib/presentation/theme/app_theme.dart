@@ -4,8 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:science_hall/presentation/theme/app_colors.dart';
 import 'package:science_hall/presentation/theme/app_text_theme.dart';
+import 'package:science_hall/route/app_route.dart';
 
 
+final appRouterProvider = Provider<AppRouter>((ref) {
+  return AppRouter();
+});
 final appThemeModeProvider = StateNotifierProvider<
     StateController<ThemeMode>,
     ThemeMode>((ref) => StateController(ThemeMode.light),);

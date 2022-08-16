@@ -43,7 +43,7 @@ class AppColors {
   factory AppColors.light() {
     return const AppColors(
       background: Colors.white,
-      accent: Color(0xff17c063),
+      accent: Color(0xff121212),
       disabled: Colors.black12,
       error: Color(0xffff7466),
       divider: Colors.black54,
