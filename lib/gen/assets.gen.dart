@@ -201,6 +201,9 @@ class $AssetsImagesGen {
   AssetGenImage get missionIcon =>
       const AssetGenImage('assets/images/missionIcon.png');
 
+  /// File path: assets/images/place.png
+  AssetGenImage get place => const AssetGenImage('assets/images/place.png');
+
   /// File path: assets/images/previewImg.jpg
   AssetGenImage get previewImg =>
       const AssetGenImage('assets/images/previewImg.jpg');

@@ -32,7 +32,6 @@ class QuickItem extends ConsumerWidget {
         margin:const EdgeInsets.only(left: 20,right: 20,bottom: 10),
         padding: const EdgeInsets.symmetric(horizontal: 24),
         height: 72.h,
-        width: double.infinity,
         child: Row(
           children: [
             QuickImage(img: img),

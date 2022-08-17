@@ -46,7 +46,7 @@ class AppColors {
       accent: Color(0xff121212),
       disabled: Colors.black12,
       error: Color(0xffff7466),
-      divider: Colors.black54,
+      divider: Color(0xffefefef),
       signIn: Color(0xff4285f4),
       signOut: Color(0xffc53829),
     );
@@ -58,7 +58,7 @@ class AppColors {
       accent: Color(0xff17c063),
       disabled: Colors.white12,
       error: Color(0xffff5544),
-      divider: Colors.white54,
+      divider: Color(0xffefefef),
       signIn: Color(0xff4285f4),
       signOut: Color(0xffc53829),
     );

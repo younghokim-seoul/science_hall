@@ -5,10 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:science_hall/gen/assets.gen.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
 
-import '../../util/dev_log.dart';
-
-class QuickItem extends ConsumerWidget {
-  const QuickItem({
+class BorderBoxItem extends ConsumerWidget {
+  const BorderBoxItem({
     Key? key,
     required this.img,
     required this.title,
@@ -28,17 +26,18 @@ class QuickItem extends ConsumerWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: theme.appColors.background,
+          border: Border.all(color: theme.appColors.divider),
+
         ),
-        margin:const EdgeInsets.only(left: 20,right: 20,bottom: 10),
+        margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        height: 72.h,
+        height: 100.h,
         width: double.infinity,
         child: Row(
           children: [
-            QuickImage(img: img),
+            img.image(),
             const Gap(16),
             Expanded(child: Text(title, style: theme.textTheme.h30)),
-            Assets.images.rightArrow.image(),
           ],
         ),
       ),
