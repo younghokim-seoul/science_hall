@@ -111,7 +111,7 @@ class VisitingInformationPage extends ConsumerWidget {
                               text: '-매주 월요일\n', style: theme.textTheme.h30),
                           TextSpan(
                               text: '-설날/추석연휴\n', style: theme.textTheme.h30),
-                          TextSpan(
+                          const TextSpan(
                               text: '(월요일이 공휴일인 경우 정상개관)',
                               style: TextStyle(
                                   color: Colors.red,
