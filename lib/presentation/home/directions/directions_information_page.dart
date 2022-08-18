@@ -45,7 +45,9 @@ class DirectionsInformationPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Gap(10),
-              SizedBox(width: double.infinity,child: Assets.images.place.image(fit: BoxFit.cover)),
+              SizedBox(
+                  width: double.infinity,
+                  child: Assets.images.place.image(fit: BoxFit.cover)),
               const Gap(20),
               BorderBoxItem(
                   img: Assets.images.locationInfo01,
@@ -136,31 +138,37 @@ class LocationInfoBox extends StatelessWidget {
               children: [
                 Text(title, style: TextStyle(color: titleColor)),
                 const Gap(10),
-                subtitle.length < 3
-                    ? Text.rich(TextSpan(children: [
-                        TextSpan(text: "${subtitle[0]}\n"),
-                        WidgetSpan(
-                            alignment: PlaceholderAlignment.middle,
-                            child: arrow.image()),
-                        TextSpan(
-                            text: " ${subtitle[1]}",
-                            style:
-                                const TextStyle(fontWeight: FontWeight.bold)),
-                      ]))
-                    : Text.rich(TextSpan(children: [
-                        TextSpan(text: subtitle[0]),
-                        WidgetSpan(
-                            alignment: PlaceholderAlignment.middle,
-                            child: arrow.image()),
-                        TextSpan(text: "${subtitle[1]}\n"),
-                        WidgetSpan(
-                            alignment: PlaceholderAlignment.middle,
-                            child: arrow.image()),
-                        TextSpan(
-                            text: subtitle[2],
-                            style:
-                                const TextStyle(fontWeight: FontWeight.bold)),
-                      ])),
+                Expanded(
+                  child: subtitle.length < 3
+                      ? Text.rich(TextSpan(children: [
+                          TextSpan(text: "${subtitle[0]}\n"),
+                          WidgetSpan(
+                              alignment: PlaceholderAlignment.middle,
+                              child: arrow.image()),
+                          TextSpan(
+                              text: " ${subtitle[1]}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                        ]))
+                      : Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: subtitle[0]),
+                              WidgetSpan(
+                                  alignment: PlaceholderAlignment.middle,
+                                  child: arrow.image()),
+                              TextSpan(text: "${subtitle[1]}\n"),
+                              WidgetSpan(
+                                  alignment: PlaceholderAlignment.middle,
+                                  child: arrow.image()),
+                              TextSpan(
+                                  text: subtitle[2],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                        ),
+                )
               ],
             ),
           ),

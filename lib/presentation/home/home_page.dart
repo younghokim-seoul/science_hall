@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
             ActionButton(
               buttonTitle: "관람시작",
               isEnable: true,
-              onPressed: () {},
+              onPressed: () => context.router.push(const SignupRoute()),
             ),
             const Gap(10)
           ],

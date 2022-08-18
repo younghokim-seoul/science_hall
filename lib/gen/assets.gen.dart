@@ -148,10 +148,6 @@ class $AssetsImagesGen {
   AssetGenImage get genderWoman =>
       const AssetGenImage('assets/images/gender-woman.png');
 
-  /// File path: assets/images/genderman.png
-  AssetGenImage get genderman =>
-      const AssetGenImage('assets/images/genderman.png');
-
   /// File path: assets/images/gijang.jpg
   AssetGenImage get gijang => const AssetGenImage('assets/images/gijang.jpg');
 

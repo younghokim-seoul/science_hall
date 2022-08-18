@@ -11,6 +11,7 @@ import 'package:science_hall/presentation/home/visiting/visiting_information_pag
 import 'package:science_hall/presentation/location/location_page.dart';
 import 'package:science_hall/presentation/main/main_page.dart';
 import 'package:science_hall/presentation/preview/preview_page.dart';
+import 'package:science_hall/presentation/signup/signup_page.dart';
 export 'app_route.gr.dart';
 
 @CupertinoAutoRouter(
@@ -68,6 +69,10 @@ export 'app_route.gr.dart';
     AutoRoute(
       path: '/detail_exhibition',
       page: DetailExhibitionPage,
+    ),
+    AutoRoute(
+      path: '/signup',
+      page: SignupPage,
     ),
   ],
 )

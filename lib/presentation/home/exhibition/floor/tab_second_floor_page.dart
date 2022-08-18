@@ -30,7 +30,7 @@ class TabSecondFloorPage extends ConsumerWidget {
                     itemBuilder: (context, index) {
                       return AnimationConfiguration.staggeredList(
                         position: index,
-                        duration: const Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 375),
                         child: SlideAnimation(
                             verticalOffset: 44.0,
                             child: ExhibitionCard(

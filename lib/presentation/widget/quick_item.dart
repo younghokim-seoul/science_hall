@@ -29,7 +29,7 @@ class QuickItem extends ConsumerWidget {
           borderRadius: BorderRadius.circular(12),
           color: theme.appColors.background,
         ),
-        margin:const EdgeInsets.only(left: 20,right: 20,bottom: 10),
+        margin:const EdgeInsets.only(left: 20,right: 20,bottom: 5,top: 5),
         padding: const EdgeInsets.symmetric(horizontal: 24),
         height: 72.h,
         child: Row(

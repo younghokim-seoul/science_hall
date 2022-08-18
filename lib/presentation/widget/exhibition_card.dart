@@ -49,8 +49,8 @@ class ShowRoomImage extends StatelessWidget {
       child: Image.asset(
         imgPath,
         fit: BoxFit.cover,
-        height: 100.h,
-        width: 100.h,
+        height: 70.h,
+        width: 70.h,
       ),
     );
   }
