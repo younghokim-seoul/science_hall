@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:science_hall/gen/assets.gen.dart';
 
 class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class EventPage extends StatefulWidget {
 class _EventPageState extends State<EventPage> {
   @override
   Widget build(BuildContext context) {
+
     return Container();
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:science_hall/data/datasource/remote/mock_data_store.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
-import 'package:science_hall/route/app_route.dart';
 
 import 'di_container.dart' as dc;
 
@@ -17,11 +17,10 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    MockDataStore(context);
     final theme = ref.watch(appThemeProvider);
     final themeMode = ref.watch(appThemeModeProvider);
     final appRouter = ref.watch(appRouterProvider);
-
-   
 
     return ScreenUtilInit(
       designSize: const Size(360, 690),
@@ -35,7 +34,6 @@ class App extends ConsumerWidget {
           routeInformationParser: appRouter.defaultRouteParser(),
           routerDelegate: appRouter.delegate(),
         );
-
       },
     );
   }

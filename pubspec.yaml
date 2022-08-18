@@ -36,6 +36,12 @@ dependencies:
   flutter_screenutil: ^5.5.3+2
 
 
+  flutter_staggered_animations:
+    git:
+      url: https://github.com/faisal-kabir/flutter_staggered_animations.git
+      ref: develop
+
+
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +66,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+    - mockdata/
 
 
 

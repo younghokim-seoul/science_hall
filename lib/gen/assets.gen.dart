@@ -11,6 +11,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $MockdataGen {
+  const $MockdataGen();
+
+  /// File path: mockdata/get_data.json
+  String get getData => 'mockdata/get_data.json';
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -22,12 +29,30 @@ class $AssetsImagesGen {
   AssetGenImage get acquiredNo =>
       const AssetGenImage('assets/images/acquiredNo.png');
 
+  /// File path: assets/images/aquarium.jpg
+  AssetGenImage get aquarium =>
+      const AssetGenImage('assets/images/aquarium.jpg');
+
   /// File path: assets/images/arrow-right.png
   AssetGenImage get arrowRight =>
       const AssetGenImage('assets/images/arrow-right.png');
 
   /// File path: assets/images/back.png
   AssetGenImage get back => const AssetGenImage('assets/images/back.png');
+
+  /// File path: assets/images/development.jpg
+  AssetGenImage get development =>
+      const AssetGenImage('assets/images/development.jpg');
+
+  /// File path: assets/images/dokdo.jpg
+  AssetGenImage get dokdo => const AssetGenImage('assets/images/dokdo.jpg');
+
+  /// File path: assets/images/dream.jpg
+  AssetGenImage get dream => const AssetGenImage('assets/images/dream.jpg');
+
+  /// File path: assets/images/environment.jpg
+  AssetGenImage get environment =>
+      const AssetGenImage('assets/images/environment.jpg');
 
   /// File path: assets/images/event-icon.png
   AssetGenImage get eventIcon =>
@@ -94,6 +119,19 @@ class $AssetsImagesGen {
   /// File path: assets/images/ex03_01.jpg
   AssetGenImage get ex0301 => const AssetGenImage('assets/images/ex03_01.jpg');
 
+  /// File path: assets/images/exhibition.jpg
+  AssetGenImage get exhibition =>
+      const AssetGenImage('assets/images/exhibition.jpg');
+
+  /// File path: assets/images/fishing.jpg
+  AssetGenImage get fishing => const AssetGenImage('assets/images/fishing.jpg');
+
+  /// File path: assets/images/food.jpg
+  AssetGenImage get food => const AssetGenImage('assets/images/food.jpg');
+
+  /// File path: assets/images/fsm.JPG
+  AssetGenImage get fsm => const AssetGenImage('assets/images/fsm.JPG');
+
   /// File path: assets/images/gender-man-on.png
   AssetGenImage get genderManOn =>
       const AssetGenImage('assets/images/gender-man-on.png');
@@ -113,6 +151,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/genderman.png
   AssetGenImage get genderman =>
       const AssetGenImage('assets/images/genderman.png');
+
+  /// File path: assets/images/gijang.jpg
+  AssetGenImage get gijang => const AssetGenImage('assets/images/gijang.jpg');
 
   /// File path: assets/images/info-icon01.png
   AssetGenImage get infoIcon01 =>
@@ -137,6 +178,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/intro_logo.png
   AssetGenImage get introLogo =>
       const AssetGenImage('assets/images/intro_logo.png');
+
+  /// File path: assets/images/life.jpg
+  AssetGenImage get life => const AssetGenImage('assets/images/life.jpg');
 
   /// File path: assets/images/location.png
   AssetGenImage get location =>
@@ -208,9 +252,17 @@ class $AssetsImagesGen {
   AssetGenImage get previewImg =>
       const AssetGenImage('assets/images/previewImg.jpg');
 
+  /// File path: assets/images/resource.jpg
+  AssetGenImage get resource =>
+      const AssetGenImage('assets/images/resource.jpg');
+
   /// File path: assets/images/right-arrow.png
   AssetGenImage get rightArrow =>
       const AssetGenImage('assets/images/right-arrow.png');
+
+  /// File path: assets/images/whale_sea.jpg
+  AssetGenImage get whaleSea =>
+      const AssetGenImage('assets/images/whale_sea.jpg');
 }
 
 class $AssetsSvgsGen {
@@ -285,6 +337,7 @@ class Assets {
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsSvgsGen svgs = $AssetsSvgsGen();
+  static const $MockdataGen mockdata = $MockdataGen();
 }
 
 class AssetGenImage {
