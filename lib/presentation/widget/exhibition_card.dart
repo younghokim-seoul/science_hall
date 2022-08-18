@@ -47,7 +47,7 @@ class ShowRoomImage extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Image.asset(
-        "assets/images/ex01_05.jpg",
+        imgPath,
         fit: BoxFit.cover,
         height: 100.h,
         width: 100.h,

@@ -13,7 +13,6 @@ class MockRepositoryImpl extends MockRepository{
    String result = await MockDataStore.asset.loadString("mockdata/get_data.json");
    List<dynamic> parsedJson = jsonDecode(result);
    var value = parsedJson.map((dynamic i) => ShowRoomEntity.fromJson(i as Map<String, dynamic>)).where((element) => element.floor == floor).toList();
-   Log.i("::::::::result ${value.length}");
    return value;
   }
 

@@ -129,8 +129,8 @@ class $AssetsImagesGen {
   /// File path: assets/images/food.jpg
   AssetGenImage get food => const AssetGenImage('assets/images/food.jpg');
 
-  /// File path: assets/images/fsm.JPG
-  AssetGenImage get fsm => const AssetGenImage('assets/images/fsm.JPG');
+  /// File path: assets/images/fsm.jpg
+  AssetGenImage get fsm => const AssetGenImage('assets/images/fsm.jpg');
 
   /// File path: assets/images/gender-man-on.png
   AssetGenImage get genderManOn =>
