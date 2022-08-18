@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -5,6 +6,8 @@ import 'package:science_hall/presentation/home/exhibition/exhibition_provider.da
 import 'package:science_hall/presentation/widget/error_card.dart';
 import 'package:science_hall/presentation/widget/exhibition_card.dart';
 import 'package:science_hall/util/dev_log.dart';
+
+import '../../../../route/app_route.dart';
 
 class TabUndergroundFloorPage extends ConsumerWidget {
   const TabUndergroundFloorPage({
@@ -31,7 +34,10 @@ class TabUndergroundFloorPage extends ConsumerWidget {
                         child: SlideAnimation(
                             verticalOffset: 44.0,
                             child: ExhibitionCard(
-                                onTap: () { Log.d(":::클릭"); }, showRoomEntity: items[index])),
+                                onTap: () => context.router.push(
+                                    DetailExhibitionRoute(
+                                        showRoomEntity: items[index])),
+                                showRoomEntity: items[index])),
                       );
                     }),
               );

@@ -45,8 +45,8 @@ class DirectionsInformationPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Gap(10),
-              Assets.images.place.image(fit: BoxFit.scaleDown),
-              const Gap(30),
+              SizedBox(width: double.infinity,child: Assets.images.place.image(fit: BoxFit.cover)),
+              const Gap(20),
               BorderBoxItem(
                   img: Assets.images.locationInfo01,
                   title: '(우)46083 부산광역시 기장군 기장읍\n기장해안로 216',
