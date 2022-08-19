@@ -10,6 +10,7 @@ import 'package:science_hall/presentation/theme/app_theme.dart';
 import 'package:science_hall/presentation/widget/action_button.dart';
 import 'package:science_hall/presentation/widget/age_list_card.dart';
 import 'package:science_hall/presentation/widget/gender_card.dart';
+import 'package:science_hall/util/dev_log.dart';
 
 
 class SignupPage extends ConsumerWidget {
@@ -28,6 +29,10 @@ class SignupPage extends ConsumerWidget {
     final isGenderValid = ref.watch(checkGenderProvider(initialGenderState));
     final isAgeVaild = ref.watch(checkAgeProvider(initialAgeState));
     final beaconManager = ref.watch(beaconProvider);
+
+    beaconManager.beaconState.stream.listen((event) {
+      Log.d(":::::::::::비콘 정보.. " + event.toString());
+    });
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

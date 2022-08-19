@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'dart:core';
+import 'package:arc/arc_subject.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:science_hall/data/datasource/beacon/reactive_beacon_state.dart';
 import 'package:science_hall/util/dev_log.dart';
@@ -10,6 +11,8 @@ class BeaconManager extends ReactiveBeaconState {
   var locationService = false;
 
   StreamSubscription<RangingResult>? _subscription;
+
+  final beaconState = ArcSubject<RangingResult>();
 
   bool get bluetoothEnabled => bluetoothState.value == BluetoothState.stateOn;
 
@@ -46,9 +49,13 @@ class BeaconManager extends ReactiveBeaconState {
 
     _subscription =
         flutterBeacon.ranging(regions).listen((RangingResult result) {
-      Log.d(result.toString());
-
-
+      // Log.d(result.toString());
+      if(result.beacons.isNotEmpty){
+        int rssi = result.beacons.first.rssi;
+        if(rssi.abs() >= 35 && rssi.abs() <= 99){
+          beaconState.val = result;
+        }
+      }
     });
   }
 
@@ -56,6 +63,10 @@ class BeaconManager extends ReactiveBeaconState {
     Log.d('Stop ble discovery');
     await _subscription?.cancel();
     _subscription = null;
+  }
+
+  Future<void> dispose() async {
+    await beaconState.close();
   }
 
   @override
