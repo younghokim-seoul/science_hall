@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:science_hall/data/datasource/beacon/beacon_provider.dart';
 import 'package:science_hall/presentation/signup/signup_provider.dart';
-import 'package:science_hall/presentation/theme/app_text_theme.dart';
+
 import 'package:science_hall/presentation/theme/app_theme.dart';
 import 'package:science_hall/presentation/widget/action_button.dart';
 import 'package:science_hall/presentation/widget/age_list_card.dart';
@@ -26,6 +27,7 @@ class SignupPage extends ConsumerWidget {
     final ageState = ref.watch(genderStateProvider(initialGenderState));
     final isGenderValid = ref.watch(checkGenderProvider(initialGenderState));
     final isAgeVaild = ref.watch(checkAgeProvider(initialAgeState));
+    final beaconManager = ref.watch(beaconProvider);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -66,7 +68,9 @@ class SignupPage extends ConsumerWidget {
               child: ActionButton(
                 buttonTitle: "관람하기",
                 isEnable: isGenderValid && isAgeVaild,
-                onPressed: () => {},
+                onPressed: () => {
+                  beaconManager.check()
+                },
               ),
             )
           ],
