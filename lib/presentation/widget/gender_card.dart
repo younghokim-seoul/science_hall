@@ -11,8 +11,8 @@ class GenderCard extends ConsumerWidget {
   const GenderCard({
     Key? key,
     required this.isCheck,
-    this.height = 100,
-    this.width = 100,
+    this.height = 80,
+    this.width = 80,
     required this.gender,
     required this.onTap,
   }) : super(key: key);

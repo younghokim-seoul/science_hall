@@ -41,7 +41,7 @@ class SignupPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Gap(20),
-            Text('귀하의 성별을\n알려주세요!', style: theme.textTheme.h40.bold()),
+            Text('귀하의 성별을\n알려주세요!', style: theme.textTheme.h50),
             const Gap(10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -57,7 +57,7 @@ class SignupPage extends ConsumerWidget {
               ],
             ),
             const Gap(30),
-            Text('귀하의 나이를\n알려주세요!', style: theme.textTheme.h40.bold()),
+            Text('귀하의 나이를\n알려주세요!', style: theme.textTheme.h50),
             const Gap(20),
             AgeListCard(initialState: initialAgeState),
             const Spacer(),
