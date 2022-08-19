@@ -19,7 +19,11 @@ class BeaconManager extends ReactiveBeaconState {
 
   bool get locationServiceEnabled => locationService;
 
-  final regions = <Region>[];
+  final regions = <Region>[
+    Region(
+        identifier: 'Bluno',
+        proximityUUID: 'e2c56db5-dffb-48d2-b060-d0f5a71096e0'),
+  ];
 
   Future<void> initScanBeacon() async => await flutterBeacon.initializeScanning;
 
@@ -28,8 +32,7 @@ class BeaconManager extends ReactiveBeaconState {
     bluetoothState = await flutterBeacon.bluetoothState;
     authorizationStatus = await flutterBeacon.authorizationStatus;
     locationService = await flutterBeacon.checkLocationServicesIfEnabled;
-    Log.d(
-        ":::bluetoothState $bluetoothState authorizationStatus $authorizationStatus locationServiceEnabled $locationServiceEnabled");
+    Log.d(":::bluetoothState $bluetoothState authorizationStatus $authorizationStatus locationServiceEnabled $locationServiceEnabled");
 
     bool isReady =
         bluetoothEnabled && authorizationStatusOk && locationServiceEnabled;
@@ -40,17 +43,12 @@ class BeaconManager extends ReactiveBeaconState {
     Log.d("::::startScan");
     if (_subscription != null) await stopScan();
 
-    regions.add(
-      Region(
-          identifier: 'Bluno',
-          proximityUUID: 'e2c56db5-dffb-48d2-b060-d0f5a71096e0',
-          minor: 29,
-          major: 2027),
-    );
 
     _subscription =
         flutterBeacon.ranging(regions).listen((RangingResult result) {
       Log.d(result.toString());
+
+
     });
   }
 
