@@ -21,7 +21,7 @@ class GenderCard extends ConsumerWidget {
   final bool isCheck;
   final double height;
   final double width;
-  final Function onTap;
+  final void Function(int index) onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,22 +34,26 @@ class GenderCard extends ConsumerWidget {
             padding: const EdgeInsets.all(20.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              color: theme.appColors.background,
+              color:
+                  isCheck ? theme.appColors.signIn : theme.appColors.background,
               border: Border.all(color: theme.appColors.divider),
             ),
-            child: InkWell(onTap: () => onTap(),
-            child: gender == Gender.MAN
-                ? Assets.images.genderMan.image(height: 150)
-                : Assets.images.genderWoman.image(height: 150),)
-          ),
+            child: InkWell(
+              onTap: () => onTap(gender == Gender.MAN ? 0 : 1),
+              child: gender == Gender.MAN
+                  ? isCheck
+                      ? Assets.images.genderManOn.image()
+                      : Assets.images.genderMan.image()
+                  : isCheck
+                      ? Assets.images.genderWomanOn.image()
+                      : Assets.images.genderWoman.image(),
+            )),
         const Gap(10),
         Text(gender == Gender.MAN ? "남" : "여",
             style: TextStyle(
                 color: isCheck
                     ? theme.appColors.accent
                     : theme.appColors.disabled))
-
-
       ],
     );
   }

@@ -14,6 +14,7 @@ class ExhibitionInformationPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
     return AutoTabsRouter.tabBar(
+        physics: const NeverScrollableScrollPhysics(),
         routes: const [
           TabFirstFloorRoute(),
           TabSecondFloorRoute(),

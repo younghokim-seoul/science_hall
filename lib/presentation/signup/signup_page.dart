@@ -3,21 +3,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:science_hall/presentation/signup/signup_provider.dart';
 import 'package:science_hall/presentation/theme/app_text_theme.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
 import 'package:science_hall/presentation/widget/action_button.dart';
 import 'package:science_hall/presentation/widget/age_list_card.dart';
 import 'package:science_hall/presentation/widget/gender_card.dart';
-import 'package:science_hall/util/dev_log.dart';
+
 
 class SignupPage extends ConsumerWidget {
   const SignupPage({
     Key? key,
   }) : super(key: key);
 
+
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    List<bool>? initialGenderState;
+    List<bool>? initialAgeState;
     final theme = ref.watch(appThemeProvider);
+    final ageState = ref.watch(genderStateProvider(initialGenderState));
+    final isGenderValid = ref.watch(checkGenderProvider(initialGenderState));
+    final isAgeVaild = ref.watch(checkAgeProvider(initialAgeState));
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -39,29 +47,25 @@ class SignupPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GenderCard(
-                    isCheck: true,
+                    isCheck: ageState[0],
                     gender: Gender.MAN,
-                    onTap: () {
-                      Log.d("젠더 클릭...");
-                    }),
+                    onTap: ref.read(genderStateProvider(initialGenderState).notifier).toggleGender),
                 GenderCard(
-                    isCheck: false,
+                    isCheck: ageState[1],
                     gender: Gender.WOMAN,
-                    onTap: () {
-                      Log.d("젠더 클릭...");
-                    }),
+                    onTap: ref.read(genderStateProvider(initialGenderState).notifier).toggleGender),
               ],
             ),
             const Gap(30),
             Text('귀하의 나이를\n알려주세요!', style: theme.textTheme.h40.bold()),
             const Gap(20),
-            const AgeListCard(),
+            AgeListCard(initialState: initialAgeState),
             const Spacer(),
             Align(
               alignment: Alignment.center,
               child: ActionButton(
                 buttonTitle: "관람하기",
-                isEnable: true,
+                isEnable: isGenderValid && isAgeVaild,
                 onPressed: () => {},
               ),
             )

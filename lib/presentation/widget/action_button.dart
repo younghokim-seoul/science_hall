@@ -27,7 +27,7 @@ class ActionButton extends StatelessWidget {
         height: 50.h,
         child: ElevatedButton(
           style: ButtonStyle(
-            backgroundColor :MaterialStateProperty.all(const Color(0xff064068)),
+            backgroundColor : isEnable ? MaterialStateProperty.all(const Color(0xff064068)) : MaterialStateProperty.all(const Color(0xffFAF2E6)) ,
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),

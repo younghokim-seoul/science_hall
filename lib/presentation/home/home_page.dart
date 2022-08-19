@@ -39,12 +39,11 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget _header = Container(
-  color: Colors.black,
+Widget _header = SizedBox(
   height: 280.h,
   child: Stack(
     children: [
-      Positioned.fill(child: Assets.images.mainTop.image(fit: BoxFit.fill)),
+      Positioned.fill(child: Assets.images.mainTop.image(fit: BoxFit.cover)),
       Positioned(
         top: 0,
         bottom: 0,

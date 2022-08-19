@@ -8,14 +8,16 @@ import 'package:science_hall/presentation/theme/app_theme.dart';
 class AgeBoxItem extends ConsumerWidget {
   const AgeBoxItem({
     Key? key,
+    required this.index,
     required this.title,
     required this.isCheck,
     required this.onTab,
   }) : super(key: key);
 
-  final Function onTab;
+  final void Function(int index) onTab;
   final String title;
   final bool isCheck;
+  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,16 +26,16 @@ class AgeBoxItem extends ConsumerWidget {
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: theme.appColors.background,
-          border: Border.all(color: theme.appColors.divider),
+          color: isCheck ? theme.appColors.signIn : theme.appColors.background,
+          border: Border.all(color: isCheck ? Colors.transparent : theme.appColors.divider),
         ),
         margin: const EdgeInsets.only(bottom: 10,left: 2),
-        padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 10),
-        width: width /3.5,
-        child: InkWell(
-          onTap: () => onTab(),
-          child: Center(
-            child: Text(title, style: theme.textTheme.h30),
+      width: width / 3.5,
+      child: InkWell(
+          onTap: () => onTab(index),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 10),
+            child: Text(title, style: TextStyle(color: isCheck ? Colors.white : Colors.black) ),
           ),
         ),
       );
