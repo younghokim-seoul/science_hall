@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
-import 'package:science_hall/gen/assets.gen.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
 
 class AgeBoxItem extends ConsumerWidget {
@@ -34,7 +31,7 @@ class AgeBoxItem extends ConsumerWidget {
       child: InkWell(
           onTap: () => onTab(index),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 12),
             child: Text(title, style: TextStyle(color: isCheck ? Colors.white : Colors.black) ),
           ),
         ),

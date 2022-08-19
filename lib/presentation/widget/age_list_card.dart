@@ -9,7 +9,7 @@ class AgeListCard extends ConsumerWidget {
 
   final List<bool>? initialState;
 
-  static List<String> ageTitle = ["10대", "20대", "30s대", "40대", "50대", "60대 이상"];
+  static List<String> ageTitle = ["10대", "20대", "30대", "40대", "50대", "60대 이상"];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

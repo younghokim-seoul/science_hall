@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ import 'package:science_hall/gen/assets.gen.dart';
 import 'package:science_hall/presentation/theme/app_text_theme.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
 import 'package:science_hall/presentation/widget/border_item.dart';
-import 'package:science_hall/util/dev_log.dart';
 
 class DirectionsInformationPage extends ConsumerWidget {
   const DirectionsInformationPage({Key? key}) : super(key: key);

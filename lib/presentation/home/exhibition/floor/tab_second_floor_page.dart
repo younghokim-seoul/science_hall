@@ -5,7 +5,6 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:science_hall/presentation/home/exhibition/exhibition_provider.dart';
 import 'package:science_hall/presentation/widget/error_card.dart';
 import 'package:science_hall/presentation/widget/exhibition_card.dart';
-import 'package:science_hall/util/dev_log.dart';
 
 import '../../../../route/app_route.dart';
 
