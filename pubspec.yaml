@@ -41,6 +41,7 @@ dependencies:
       url: https://github.com/faisal-kabir/flutter_staggered_animations.git
       ref: develop
   flutter_beacon: ^0.5.1
+  shared_preferences: ^2.0.15
 
 
 

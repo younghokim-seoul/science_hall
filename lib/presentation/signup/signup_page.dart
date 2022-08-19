@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:science_hall/data/datasource/beacon/beacon_provider.dart';
+import 'package:science_hall/di_container.dart';
 import 'package:science_hall/presentation/signup/signup_provider.dart';
 
 import 'package:science_hall/presentation/theme/app_theme.dart';
@@ -30,7 +30,7 @@ class SignupPage extends ConsumerWidget {
     final isAgeVaild = ref.watch(checkAgeProvider(initialAgeState));
     final beaconManager = ref.watch(beaconProvider);
 
-    beaconManager.beaconState.stream.listen((event) {
+    beaconManager.state.listen((event) {
       Log.d(":::::::::::비콘 정보.. " + event.toString());
     });
     return Scaffold(

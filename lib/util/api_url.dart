@@ -1,4 +1,4 @@
 class ApiUrl {
-  static const String BASE_URL = "https://api.mock.co.kr";
-  static const String LOGIN = "/login";
+  static const String BASE_URL = "https://smartseas.kr/";
+  static const String TOKEN = "/api/v1/token-auth/";
 }

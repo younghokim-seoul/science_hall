@@ -1,7 +1,9 @@
+import 'package:arc/arc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:science_hall/data/datasource/remote/mock_data_store.dart';
+import 'package:science_hall/di_container.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
 
 import 'di_container.dart' as dc;
@@ -21,6 +23,8 @@ class App extends ConsumerWidget {
     final theme = ref.watch(appThemeProvider);
     final themeMode = ref.watch(appThemeModeProvider);
     final appRouter = ref.watch(appRouterProvider);
+
+    ref.read(tokenProvider);
 
     return ScreenUtilInit(
       designSize: const Size(360, 690),

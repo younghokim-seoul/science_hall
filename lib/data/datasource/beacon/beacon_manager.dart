@@ -70,5 +70,5 @@ class BeaconManager extends ReactiveBeaconState {
   }
 
   @override
-  Stream get state => throw UnimplementedError();
+  Stream get state => beaconState.stream;
 }
