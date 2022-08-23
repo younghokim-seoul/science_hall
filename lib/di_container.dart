@@ -1,7 +1,5 @@
 import 'package:arc/arc.dart';
-import 'package:arc/preferences_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 import 'package:science_hall/data/datasource/beacon/beacon_manager.dart';
 import 'package:science_hall/data/datasource/remote/http_request.dart';
 import 'package:science_hall/data/datasource/remote/remote_datasource.dart';
@@ -11,11 +9,6 @@ import 'package:science_hall/domain/repository/science_repository.dart';
 import 'package:science_hall/util/dev_log.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final it = GetIt.instance;
-
-Future<void> init() async {
-  // it.registerFactory(() => MainViewModel());
-}
 
 final beaconProvider =
     Provider.autoDispose<BeaconManager>((ref) => BeaconManager());
