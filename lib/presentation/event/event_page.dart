@@ -1,4 +1,3 @@
-import 'package:arc/arc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -135,10 +134,11 @@ class _EventListState extends ConsumerState<EventList> {
                     width: 70),
                 const Gap(16),
                 Expanded(
-                    child: Text(
-                  eventStateProvider.events[index].name,
-                  style: theme.textTheme.h30.bold(),
-                ))
+                  child: Text(
+                    eventStateProvider.events[index].name,
+                    style: theme.textTheme.h30.bold(),
+                  ),
+                )
               ],
             ),
           ),

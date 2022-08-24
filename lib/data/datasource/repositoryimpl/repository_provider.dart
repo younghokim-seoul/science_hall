@@ -20,8 +20,3 @@ final tokenProvider = Provider.autoDispose<void>((ref) async {
     await pref.setString("token", entity.access);
   }
 });
-
-final eventProvider = FutureProvider.autoDispose((ref){
-  final repository = ref.watch(scienceRepositoryProvider);
-  return repository.fetchEvents();
-});

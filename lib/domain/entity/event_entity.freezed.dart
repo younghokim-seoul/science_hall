@@ -26,7 +26,9 @@ mixin _$EventEntity {
   String get end_dt => throw _privateConstructorUsedError;
   int get type => throw _privateConstructorUsedError;
   String? get explanation => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  List<InnerExhibitionEntity> get inner_exhibition =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +48,8 @@ abstract class $EventEntityCopyWith<$Res> {
       String end_dt,
       int type,
       String? explanation,
-      String image});
+      String? image,
+      List<InnerExhibitionEntity> inner_exhibition});
 }
 
 /// @nodoc
@@ -66,6 +69,7 @@ class _$EventEntityCopyWithImpl<$Res> implements $EventEntityCopyWith<$Res> {
     Object? type = freezed,
     Object? explanation = freezed,
     Object? image = freezed,
+    Object? inner_exhibition = freezed,
   }) {
     return _then(_value.copyWith(
       pk: pk == freezed
@@ -95,7 +99,11 @@ class _$EventEntityCopyWithImpl<$Res> implements $EventEntityCopyWith<$Res> {
       image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      inner_exhibition: inner_exhibition == freezed
+          ? _value.inner_exhibition
+          : inner_exhibition // ignore: cast_nullable_to_non_nullable
+              as List<InnerExhibitionEntity>,
     ));
   }
 }
@@ -114,7 +122,8 @@ abstract class _$$_EventEntityCopyWith<$Res>
       String end_dt,
       int type,
       String? explanation,
-      String image});
+      String? image,
+      List<InnerExhibitionEntity> inner_exhibition});
 }
 
 /// @nodoc
@@ -136,6 +145,7 @@ class __$$_EventEntityCopyWithImpl<$Res> extends _$EventEntityCopyWithImpl<$Res>
     Object? type = freezed,
     Object? explanation = freezed,
     Object? image = freezed,
+    Object? inner_exhibition = freezed,
   }) {
     return _then(_$_EventEntity(
       pk: pk == freezed
@@ -165,7 +175,11 @@ class __$$_EventEntityCopyWithImpl<$Res> extends _$EventEntityCopyWithImpl<$Res>
       image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      inner_exhibition: inner_exhibition == freezed
+          ? _value._inner_exhibition
+          : inner_exhibition // ignore: cast_nullable_to_non_nullable
+              as List<InnerExhibitionEntity>,
     ));
   }
 }
@@ -180,7 +194,9 @@ class _$_EventEntity implements _EventEntity {
       required this.end_dt,
       required this.type,
       required this.explanation,
-      required this.image});
+      required this.image,
+      required final List<InnerExhibitionEntity> inner_exhibition})
+      : _inner_exhibition = inner_exhibition;
 
   factory _$_EventEntity.fromJson(Map<String, dynamic> json) =>
       _$$_EventEntityFromJson(json);
@@ -198,11 +214,17 @@ class _$_EventEntity implements _EventEntity {
   @override
   final String? explanation;
   @override
-  final String image;
+  final String? image;
+  final List<InnerExhibitionEntity> _inner_exhibition;
+  @override
+  List<InnerExhibitionEntity> get inner_exhibition {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_inner_exhibition);
+  }
 
   @override
   String toString() {
-    return 'EventEntity(pk: $pk, name: $name, start_dt: $start_dt, end_dt: $end_dt, type: $type, explanation: $explanation, image: $image)';
+    return 'EventEntity(pk: $pk, name: $name, start_dt: $start_dt, end_dt: $end_dt, type: $type, explanation: $explanation, image: $image, inner_exhibition: $inner_exhibition)';
   }
 
   @override
@@ -217,7 +239,9 @@ class _$_EventEntity implements _EventEntity {
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality()
                 .equals(other.explanation, explanation) &&
-            const DeepCollectionEquality().equals(other.image, image));
+            const DeepCollectionEquality().equals(other.image, image) &&
+            const DeepCollectionEquality()
+                .equals(other._inner_exhibition, _inner_exhibition));
   }
 
   @JsonKey(ignore: true)
@@ -230,7 +254,8 @@ class _$_EventEntity implements _EventEntity {
       const DeepCollectionEquality().hash(end_dt),
       const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(explanation),
-      const DeepCollectionEquality().hash(image));
+      const DeepCollectionEquality().hash(image),
+      const DeepCollectionEquality().hash(_inner_exhibition));
 
   @JsonKey(ignore: true)
   @override
@@ -247,13 +272,15 @@ class _$_EventEntity implements _EventEntity {
 
 abstract class _EventEntity implements EventEntity {
   factory _EventEntity(
-      {required final int pk,
-      required final String name,
-      required final String start_dt,
-      required final String end_dt,
-      required final int type,
-      required final String? explanation,
-      required final String image}) = _$_EventEntity;
+          {required final int pk,
+          required final String name,
+          required final String start_dt,
+          required final String end_dt,
+          required final int type,
+          required final String? explanation,
+          required final String? image,
+          required final List<InnerExhibitionEntity> inner_exhibition}) =
+      _$_EventEntity;
 
   factory _EventEntity.fromJson(Map<String, dynamic> json) =
       _$_EventEntity.fromJson;
@@ -271,7 +298,9 @@ abstract class _EventEntity implements EventEntity {
   @override
   String? get explanation;
   @override
-  String get image;
+  String? get image;
+  @override
+  List<InnerExhibitionEntity> get inner_exhibition;
   @override
   @JsonKey(ignore: true)
   _$$_EventEntityCopyWith<_$_EventEntity> get copyWith =>
@@ -287,13 +316,13 @@ InnerExhibitionEntity _$InnerExhibitionEntityFromJson(
 mixin _$InnerExhibitionEntity {
   int get pk => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get vr_link => throw _privateConstructorUsedError;
+  String? get vr_link => throw _privateConstructorUsedError;
   int get order => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
-  String get explanation => throw _privateConstructorUsedError;
+  String? get explanation => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get x_coordinate => throw _privateConstructorUsedError;
   String get y_coordinate => throw _privateConstructorUsedError;
+  ExhibitionEntity? get exhibition => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -309,13 +338,15 @@ abstract class $InnerExhibitionEntityCopyWith<$Res> {
   $Res call(
       {int pk,
       String name,
-      String vr_link,
+      String? vr_link,
       int order,
-      String type,
-      String explanation,
+      String? explanation,
       String image,
       String x_coordinate,
-      String y_coordinate});
+      String y_coordinate,
+      ExhibitionEntity? exhibition});
+
+  $ExhibitionEntityCopyWith<$Res>? get exhibition;
 }
 
 /// @nodoc
@@ -333,11 +364,11 @@ class _$InnerExhibitionEntityCopyWithImpl<$Res>
     Object? name = freezed,
     Object? vr_link = freezed,
     Object? order = freezed,
-    Object? type = freezed,
     Object? explanation = freezed,
     Object? image = freezed,
     Object? x_coordinate = freezed,
     Object? y_coordinate = freezed,
+    Object? exhibition = freezed,
   }) {
     return _then(_value.copyWith(
       pk: pk == freezed
@@ -351,19 +382,15 @@ class _$InnerExhibitionEntityCopyWithImpl<$Res>
       vr_link: vr_link == freezed
           ? _value.vr_link
           : vr_link // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       order: order == freezed
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
-      type: type == freezed
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
       explanation: explanation == freezed
           ? _value.explanation
           : explanation // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -376,7 +403,22 @@ class _$InnerExhibitionEntityCopyWithImpl<$Res>
           ? _value.y_coordinate
           : y_coordinate // ignore: cast_nullable_to_non_nullable
               as String,
+      exhibition: exhibition == freezed
+          ? _value.exhibition
+          : exhibition // ignore: cast_nullable_to_non_nullable
+              as ExhibitionEntity?,
     ));
+  }
+
+  @override
+  $ExhibitionEntityCopyWith<$Res>? get exhibition {
+    if (_value.exhibition == null) {
+      return null;
+    }
+
+    return $ExhibitionEntityCopyWith<$Res>(_value.exhibition!, (value) {
+      return _then(_value.copyWith(exhibition: value));
+    });
   }
 }
 
@@ -390,13 +432,16 @@ abstract class _$$_InnerExhibitionEntityCopyWith<$Res>
   $Res call(
       {int pk,
       String name,
-      String vr_link,
+      String? vr_link,
       int order,
-      String type,
-      String explanation,
+      String? explanation,
       String image,
       String x_coordinate,
-      String y_coordinate});
+      String y_coordinate,
+      ExhibitionEntity? exhibition});
+
+  @override
+  $ExhibitionEntityCopyWith<$Res>? get exhibition;
 }
 
 /// @nodoc
@@ -417,11 +462,11 @@ class __$$_InnerExhibitionEntityCopyWithImpl<$Res>
     Object? name = freezed,
     Object? vr_link = freezed,
     Object? order = freezed,
-    Object? type = freezed,
     Object? explanation = freezed,
     Object? image = freezed,
     Object? x_coordinate = freezed,
     Object? y_coordinate = freezed,
+    Object? exhibition = freezed,
   }) {
     return _then(_$_InnerExhibitionEntity(
       pk: pk == freezed
@@ -435,19 +480,15 @@ class __$$_InnerExhibitionEntityCopyWithImpl<$Res>
       vr_link: vr_link == freezed
           ? _value.vr_link
           : vr_link // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       order: order == freezed
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
-      type: type == freezed
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
       explanation: explanation == freezed
           ? _value.explanation
           : explanation // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -460,6 +501,10 @@ class __$$_InnerExhibitionEntityCopyWithImpl<$Res>
           ? _value.y_coordinate
           : y_coordinate // ignore: cast_nullable_to_non_nullable
               as String,
+      exhibition: exhibition == freezed
+          ? _value.exhibition
+          : exhibition // ignore: cast_nullable_to_non_nullable
+              as ExhibitionEntity?,
     ));
   }
 }
@@ -472,11 +517,11 @@ class _$_InnerExhibitionEntity implements _InnerExhibitionEntity {
       required this.name,
       required this.vr_link,
       required this.order,
-      required this.type,
       required this.explanation,
       required this.image,
       required this.x_coordinate,
-      required this.y_coordinate});
+      required this.y_coordinate,
+      required this.exhibition});
 
   factory _$_InnerExhibitionEntity.fromJson(Map<String, dynamic> json) =>
       _$$_InnerExhibitionEntityFromJson(json);
@@ -486,23 +531,23 @@ class _$_InnerExhibitionEntity implements _InnerExhibitionEntity {
   @override
   final String name;
   @override
-  final String vr_link;
+  final String? vr_link;
   @override
   final int order;
   @override
-  final String type;
-  @override
-  final String explanation;
+  final String? explanation;
   @override
   final String image;
   @override
   final String x_coordinate;
   @override
   final String y_coordinate;
+  @override
+  final ExhibitionEntity? exhibition;
 
   @override
   String toString() {
-    return 'InnerExhibitionEntity(pk: $pk, name: $name, vr_link: $vr_link, order: $order, type: $type, explanation: $explanation, image: $image, x_coordinate: $x_coordinate, y_coordinate: $y_coordinate)';
+    return 'InnerExhibitionEntity(pk: $pk, name: $name, vr_link: $vr_link, order: $order, explanation: $explanation, image: $image, x_coordinate: $x_coordinate, y_coordinate: $y_coordinate, exhibition: $exhibition)';
   }
 
   @override
@@ -514,14 +559,15 @@ class _$_InnerExhibitionEntity implements _InnerExhibitionEntity {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.vr_link, vr_link) &&
             const DeepCollectionEquality().equals(other.order, order) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality()
                 .equals(other.explanation, explanation) &&
             const DeepCollectionEquality().equals(other.image, image) &&
             const DeepCollectionEquality()
                 .equals(other.x_coordinate, x_coordinate) &&
             const DeepCollectionEquality()
-                .equals(other.y_coordinate, y_coordinate));
+                .equals(other.y_coordinate, y_coordinate) &&
+            const DeepCollectionEquality()
+                .equals(other.exhibition, exhibition));
   }
 
   @JsonKey(ignore: true)
@@ -532,11 +578,11 @@ class _$_InnerExhibitionEntity implements _InnerExhibitionEntity {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(vr_link),
       const DeepCollectionEquality().hash(order),
-      const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(explanation),
       const DeepCollectionEquality().hash(image),
       const DeepCollectionEquality().hash(x_coordinate),
-      const DeepCollectionEquality().hash(y_coordinate));
+      const DeepCollectionEquality().hash(y_coordinate),
+      const DeepCollectionEquality().hash(exhibition));
 
   @JsonKey(ignore: true)
   @override
@@ -556,13 +602,13 @@ abstract class _InnerExhibitionEntity implements InnerExhibitionEntity {
   factory _InnerExhibitionEntity(
       {required final int pk,
       required final String name,
-      required final String vr_link,
+      required final String? vr_link,
       required final int order,
-      required final String type,
-      required final String explanation,
+      required final String? explanation,
       required final String image,
       required final String x_coordinate,
-      required final String y_coordinate}) = _$_InnerExhibitionEntity;
+      required final String y_coordinate,
+      required final ExhibitionEntity? exhibition}) = _$_InnerExhibitionEntity;
 
   factory _InnerExhibitionEntity.fromJson(Map<String, dynamic> json) =
       _$_InnerExhibitionEntity.fromJson;
@@ -572,19 +618,19 @@ abstract class _InnerExhibitionEntity implements InnerExhibitionEntity {
   @override
   String get name;
   @override
-  String get vr_link;
+  String? get vr_link;
   @override
   int get order;
   @override
-  String get type;
-  @override
-  String get explanation;
+  String? get explanation;
   @override
   String get image;
   @override
   String get x_coordinate;
   @override
   String get y_coordinate;
+  @override
+  ExhibitionEntity? get exhibition;
   @override
   @JsonKey(ignore: true)
   _$$_InnerExhibitionEntityCopyWith<_$_InnerExhibitionEntity> get copyWith =>
@@ -598,11 +644,11 @@ ExhibitionEntity _$ExhibitionEntityFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ExhibitionEntity {
   int get pk => throw _privateConstructorUsedError;
-  String? get floor_ko => throw _privateConstructorUsedError;
-  String? get floor_en => throw _privateConstructorUsedError;
+  String get floor_ko => throw _privateConstructorUsedError;
+  String get floor_en => throw _privateConstructorUsedError;
   String? get house_ko => throw _privateConstructorUsedError;
   String? get house_en => throw _privateConstructorUsedError;
-  String get drawing_image => throw _privateConstructorUsedError;
+  String? get drawing_image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -617,11 +663,11 @@ abstract class $ExhibitionEntityCopyWith<$Res> {
       _$ExhibitionEntityCopyWithImpl<$Res>;
   $Res call(
       {int pk,
-      String? floor_ko,
-      String? floor_en,
+      String floor_ko,
+      String floor_en,
       String? house_ko,
       String? house_en,
-      String drawing_image});
+      String? drawing_image});
 }
 
 /// @nodoc
@@ -650,11 +696,11 @@ class _$ExhibitionEntityCopyWithImpl<$Res>
       floor_ko: floor_ko == freezed
           ? _value.floor_ko
           : floor_ko // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       floor_en: floor_en == freezed
           ? _value.floor_en
           : floor_en // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       house_ko: house_ko == freezed
           ? _value.house_ko
           : house_ko // ignore: cast_nullable_to_non_nullable
@@ -666,7 +712,7 @@ class _$ExhibitionEntityCopyWithImpl<$Res>
       drawing_image: drawing_image == freezed
           ? _value.drawing_image
           : drawing_image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -680,11 +726,11 @@ abstract class _$$_ExhibitionEntityCopyWith<$Res>
   @override
   $Res call(
       {int pk,
-      String? floor_ko,
-      String? floor_en,
+      String floor_ko,
+      String floor_en,
       String? house_ko,
       String? house_en,
-      String drawing_image});
+      String? drawing_image});
 }
 
 /// @nodoc
@@ -715,11 +761,11 @@ class __$$_ExhibitionEntityCopyWithImpl<$Res>
       floor_ko: floor_ko == freezed
           ? _value.floor_ko
           : floor_ko // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       floor_en: floor_en == freezed
           ? _value.floor_en
           : floor_en // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       house_ko: house_ko == freezed
           ? _value.house_ko
           : house_ko // ignore: cast_nullable_to_non_nullable
@@ -731,7 +777,7 @@ class __$$_ExhibitionEntityCopyWithImpl<$Res>
       drawing_image: drawing_image == freezed
           ? _value.drawing_image
           : drawing_image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -753,15 +799,15 @@ class _$_ExhibitionEntity implements _ExhibitionEntity {
   @override
   final int pk;
   @override
-  final String? floor_ko;
+  final String floor_ko;
   @override
-  final String? floor_en;
+  final String floor_en;
   @override
   final String? house_ko;
   @override
   final String? house_en;
   @override
-  final String drawing_image;
+  final String? drawing_image;
 
   @override
   String toString() {
@@ -809,11 +855,11 @@ class _$_ExhibitionEntity implements _ExhibitionEntity {
 abstract class _ExhibitionEntity implements ExhibitionEntity {
   factory _ExhibitionEntity(
       {required final int pk,
-      required final String? floor_ko,
-      required final String? floor_en,
+      required final String floor_ko,
+      required final String floor_en,
       required final String? house_ko,
       required final String? house_en,
-      required final String drawing_image}) = _$_ExhibitionEntity;
+      required final String? drawing_image}) = _$_ExhibitionEntity;
 
   factory _ExhibitionEntity.fromJson(Map<String, dynamic> json) =
       _$_ExhibitionEntity.fromJson;
@@ -821,15 +867,15 @@ abstract class _ExhibitionEntity implements ExhibitionEntity {
   @override
   int get pk;
   @override
-  String? get floor_ko;
+  String get floor_ko;
   @override
-  String? get floor_en;
+  String get floor_en;
   @override
   String? get house_ko;
   @override
   String? get house_en;
   @override
-  String get drawing_image;
+  String? get drawing_image;
   @override
   @JsonKey(ignore: true)
   _$$_ExhibitionEntityCopyWith<_$_ExhibitionEntity> get copyWith =>

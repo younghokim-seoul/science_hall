@@ -38,8 +38,8 @@ class EventListStateNotifier extends StateNotifier<EventListState> {
         ],
         error: null,
       );
-    } catch (e) {
-      Log.d(":::::e $e");
+    } catch (e,stack) {
+      Log.d(":::::e $stack");
       state = state.copyWith(error: e, isLoading: false);
     }
   }

@@ -2,8 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:science_hall/gen/assets.gen.dart';
+import 'package:science_hall/presentation/location/location_provider.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
 import 'package:science_hall/route/app_route.dart';
+import 'package:science_hall/util/dev_log.dart';
+
+enum BottomIndex { HOME, LOCATION, PREVIEW, EVENT }
 
 class MainPage extends ConsumerWidget {
   const MainPage({
@@ -29,7 +33,12 @@ class MainPage extends ConsumerWidget {
           unselectedFontSize: 14,
           showSelectedLabels: true,
           showUnselectedLabels: true,
-          onTap: tabsRouter.setActiveIndex,
+          onTap: (index) {
+            if(BottomIndex.LOCATION.index == index){
+              ref.read(locationStateProvider.notifier).fetchBeacon();
+            }
+            tabsRouter.setActiveIndex(index);
+          },
           items: [
             BottomNavigationBarItem(
               icon: Assets.svgs.nav01.svg(

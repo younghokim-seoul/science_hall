@@ -9,11 +9,13 @@ class CachedImageCard extends StatelessWidget {
     required this.imageUrl,
     required this.height,
     required this.width,
+    this.fit = BoxFit.cover
   }) : super(key: key);
 
   final String imageUrl;
   final double height;
   final double width;
+  final BoxFit fit;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class CachedImageCard extends StatelessWidget {
         Log.d("::::error " + error);
         return Icon(Icons.error);
       },
-      fit: BoxFit.cover,
+      fit: fit,
       width: width,
       height: height,
     );
