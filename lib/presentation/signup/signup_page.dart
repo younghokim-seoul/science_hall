@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:science_hall/data/datasource/local/permission_provider.dart';
 import 'package:science_hall/di_container.dart';
 import 'package:science_hall/presentation/signup/signup_provider.dart';
 
@@ -12,13 +13,10 @@ import 'package:science_hall/presentation/widget/age_list_card.dart';
 import 'package:science_hall/presentation/widget/gender_card.dart';
 import 'package:science_hall/util/dev_log.dart';
 
-
 class SignupPage extends ConsumerWidget {
   const SignupPage({
     Key? key,
   }) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,11 +54,15 @@ class SignupPage extends ConsumerWidget {
                 GenderCard(
                     isCheck: ageState[0],
                     gender: Gender.MAN,
-                    onTap: ref.read(genderStateProvider(initialGenderState).notifier).toggleGender),
+                    onTap: ref
+                        .read(genderStateProvider(initialGenderState).notifier)
+                        .toggleGender),
                 GenderCard(
                     isCheck: ageState[1],
                     gender: Gender.WOMAN,
-                    onTap: ref.read(genderStateProvider(initialGenderState).notifier).toggleGender),
+                    onTap: ref
+                        .read(genderStateProvider(initialGenderState).notifier)
+                        .toggleGender),
               ],
             ),
             const Gap(30),
@@ -71,12 +73,15 @@ class SignupPage extends ConsumerWidget {
             Align(
               alignment: Alignment.center,
               child: ActionButton(
-                buttonTitle: "관람하기",
-                isEnable: isGenderValid && isAgeVaild,
-                onPressed: () => {
-                  beaconManager.check()
-                },
-              ),
+                  buttonTitle: "관람하기",
+                  isEnable: isGenderValid && isAgeVaild,
+                  onPressed: () async {
+                    final checkPermission =
+                        await ref.read(beaconPermissionProvider.future);
+                    if (checkPermission) {
+                      beaconManager.check();
+                    }
+                  }),
             )
           ],
         ),

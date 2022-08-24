@@ -174,7 +174,7 @@ class LocationInfoBox extends StatelessWidget {
             top: 10,
             bottom: 10,
             right: 20,
-            child: type.image(fit: BoxFit.cover),
+            child: type.image(fit: BoxFit.scaleDown),
           )
         ],
       ),

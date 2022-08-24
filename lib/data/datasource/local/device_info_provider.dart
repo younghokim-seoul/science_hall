@@ -10,7 +10,7 @@ Future<String> fetchDeviceId() async {
   try {
     if (Platform.isAndroid) {
       final androidInfo = await deviceInfoPlugin.androidInfo;
-      macId = androidInfo.id ?? "unknown";
+      macId = androidInfo.host ?? "unknown";
       print(androidInfo.toMap());
     } else if (Platform.isIOS) {
       final iosInfo = await deviceInfoPlugin.iosInfo;

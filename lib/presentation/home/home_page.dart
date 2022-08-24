@@ -32,8 +32,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               buttonTitle: "관람시작",
               isEnable: true,
               onPressed: () async {
-                final checkPermission =
-                    await ref.read(beaconPermissionProvider.future);
+                final checkPermission = await ref.read(beaconPermissionProvider.future);
                 if (checkPermission) {
                   context.router.push(const SignupRoute());
                 }
