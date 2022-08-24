@@ -43,7 +43,7 @@ class SignupPage extends ConsumerWidget {
         backgroundColor: theme.appColors.background,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

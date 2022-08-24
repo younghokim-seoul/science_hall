@@ -31,7 +31,7 @@ class VisitingInformationPage extends ConsumerWidget {
           child: Column(
             children: [
               const Gap(10),
-              Assets.images.infoTop.image(fit: BoxFit.fill),
+              SizedBox(height: 300.h, child:    Assets.images.infoTop.image(fit: BoxFit.cover),),
               const Gap(30),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),

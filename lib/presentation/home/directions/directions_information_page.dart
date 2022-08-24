@@ -44,6 +44,7 @@ class DirectionsInformationPage extends ConsumerWidget {
               const Gap(10),
               SizedBox(
                   width: double.infinity,
+                  height: 300.h,
                   child: Assets.images.place.image(fit: BoxFit.cover)),
               const Gap(20),
               BorderBoxItem(
