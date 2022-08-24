@@ -92,6 +92,7 @@ class _LocationPageState extends ConsumerState<LocationPage> {
                   )),
             ],
           ),
+          Gap(20.h),
           Center(
             child: RichText(
               text: TextSpan(

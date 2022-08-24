@@ -14,6 +14,7 @@ class MainPage extends ConsumerWidget {
     Key? key,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
@@ -34,6 +35,9 @@ class MainPage extends ConsumerWidget {
           showSelectedLabels: true,
           showUnselectedLabels: true,
           onTap: (index) {
+            if(tabsRouter.activeIndex == index){
+              return;
+            }
             if(BottomIndex.LOCATION.index == index){
               ref.read(locationStateProvider.notifier).fetchBeacon();
             }
