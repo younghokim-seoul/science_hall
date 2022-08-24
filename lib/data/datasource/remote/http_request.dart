@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:arc/arc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -9,14 +9,33 @@ import 'package:science_hall/data/datasource/remote/remote_datasource.dart';
 import 'package:science_hall/util/api_url.dart';
 import 'package:science_hall/util/constant.dart';
 import 'package:science_hall/util/dev_log.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class HttpRequest implements RemoteDataSource {
+
+  void getHeader(String path){
+    Map<String, String> header;
+    switch(path){
+      case ApiUrl.TOKEN:
+        header = {"Content-Type": "application/json"};
+        break;
+      default:
+        header = {"Content-Type": "application/json","Authorization": "JWT "};
+
+    }
+  }
   @override
   Future<Response> request(
       HttpMethod httpMethod, String path, Map<String, dynamic> param) async {
     Map<String, String> header;
     header = {"Content-Type": "application/json"};
+    if(path != ApiUrl.TOKEN){
+      final SharedPreferences pref = await SharedPreferences.getInstance();
+      if (!pref.getString("token").isNullOrEmpty){
+        header = {"Content-Type": "application/json","Authorization": "JWT ${pref.getString("token")!}"};
+      }
+    }
 
     late http.Response res;
     try {

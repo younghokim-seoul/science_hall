@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: ^2.0.15
   device_info_plus: ^4.1.2
   permission_handler: ^10.0.0
+  pull_to_refresh_flutter3: ^2.0.1
 
 
 
