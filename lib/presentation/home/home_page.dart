@@ -1,9 +1,14 @@
+import 'package:arc/arc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:science_hall/data/datasource/local/permission_provider.dart';
+import 'package:science_hall/data/datasource/local/save_beacon_provider.dart';
+import 'package:science_hall/data/datasource/local/save_user_provider.dart';
+import 'package:science_hall/di_container.dart';
 import 'package:science_hall/gen/assets.gen.dart';
 import 'package:science_hall/presentation/widget/action_button.dart';
 import 'package:science_hall/presentation/widget/quick_item.dart';
@@ -20,7 +25,24 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Log.i("_HomePageState build");
+    final beaconManager = ref.watch(beaconProvider);
+
+    beaconManager.state.listen((event) async {
+      Log.d(":::::::::::비콘 정보.. " + event.toString());
+      String latestUUID = await getBeaconUUID();
+      var ranging = event as RangingResult;
+
+      if (ranging.beacons.isNotEmpty) {
+        if (latestUUID != ranging.region.proximityUUID) {
+          if (!ranging.region.proximityUUID.isNullOrEmpty) {
+            await saveBeaconUUID(ranging.region.proximityUUID!);
+          }
+        }
+      }
+
+      Log.d(":::::::::::비콘 정보.. " + event.region.proximityUUID.toString());
+    });
+
     return Scaffold(
       backgroundColor: const Color(0xfff0f0f0),
       body: SingleChildScrollView(
@@ -32,9 +54,15 @@ class _HomePageState extends ConsumerState<HomePage> {
               buttonTitle: "관람시작",
               isEnable: true,
               onPressed: () async {
-                final checkPermission = await ref.read(beaconPermissionProvider.future);
-                if (checkPermission) {
+                var userInfo = await getUserInfo();
+                if (userInfo.isNullOrEmpty) {
                   context.router.push(const SignupRoute());
+                } else {
+                  final checkPermission =
+                      await ref.read(beaconPermissionProvider.future);
+                  if (checkPermission) {
+                    beaconManager.check();
+                  }
                 }
               },
             ),

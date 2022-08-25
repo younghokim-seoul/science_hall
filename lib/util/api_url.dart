@@ -8,4 +8,5 @@ class ApiUrl {
 
   static const String LOCAL_TOKEN ="token";
   static const String LOCAL_USER_INFO ="user_info";
+  static const String LOCAL_BEACON ="beacon";
 }

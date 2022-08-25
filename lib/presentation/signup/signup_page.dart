@@ -3,16 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:science_hall/data/datasource/local/permission_provider.dart';
 import 'package:science_hall/data/datasource/local/save_user_provider.dart';
-import 'package:science_hall/di_container.dart';
 import 'package:science_hall/presentation/signup/signup_provider.dart';
-
 import 'package:science_hall/presentation/theme/app_theme.dart';
 import 'package:science_hall/presentation/widget/action_button.dart';
 import 'package:science_hall/presentation/widget/age_list_card.dart';
 import 'package:science_hall/presentation/widget/gender_card.dart';
-import 'package:science_hall/route/app_route.dart';
 import 'package:science_hall/util/dev_log.dart';
 
 class SignupPage extends ConsumerWidget {
@@ -28,13 +24,6 @@ class SignupPage extends ConsumerWidget {
     final ageState = ref.watch(genderStateProvider(initialGenderState));
     final isGenderValid = ref.watch(checkGenderProvider(initialGenderState));
     final isAgeVaild = ref.watch(checkAgeProvider(initialAgeState));
-    final beaconManager = ref.watch(beaconProvider);
-
-
-    beaconManager.state.listen((event) {
-      Log.d(":::::::::::비콘 정보.. " + event.toString());
-    });
-
 
     return Scaffold(
       appBar: AppBar(
@@ -81,17 +70,9 @@ class SignupPage extends ConsumerWidget {
                   buttonTitle: "관람하기",
                   isEnable: isGenderValid && isAgeVaild,
                   onPressed: () async {
-
                     int genderIndex = await ref.read(genderStateProvider(initialGenderState).notifier).getCheckIndex();
                     int ageIndex = await ref.read(ageStateProvider(initialGenderState).notifier).getCheckIndex();
-
-                    await saveUserInfo(ageIndex,genderIndex);
-
-                    final checkPermission = await ref.read(beaconPermissionProvider.future);
-                    if (checkPermission) {
-                      beaconManager.check();
-                    }
-                    context.router.pop;
+                    await saveUserInfo(ageIndex,genderIndex).then((value) => context.router.pop());
                   }),
             )
           ],
