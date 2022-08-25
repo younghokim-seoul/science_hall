@@ -30,15 +30,18 @@ class LocationStateNotifier extends StateNotifier<LocationState> {
       Map<String, dynamic> param = {};
       param['uuid'] = "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0";
       final response = await scienceRepository.fetchExhibition(param);
-      state = state.copyWith(
-        isLoading: false,
-        location : response,
-        error: null,
-      );
+      if(mounted){
+        state = state.copyWith(
+          isLoading: false,
+          location : response,
+          error: null,
+        );
+      }
     } catch (e,print) {
-      Log.d(":::::e에러허... $e");
       Log.d(":::print " + print.toString());
-      state = state.copyWith(error: e, isLoading: false);
+      if(mounted){
+        state = state.copyWith(error: e, isLoading: false);
+      }
     }
   }
 }

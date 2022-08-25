@@ -2,6 +2,7 @@ import 'package:science_hall/data/datasource/remote/remote_datasource.dart';
 import 'package:science_hall/domain/entity/beacon_entity.dart';
 import 'package:science_hall/domain/entity/event_entity.dart';
 import 'package:science_hall/domain/entity/token_entity.dart';
+import 'package:science_hall/domain/entity/user_log_entity.dart';
 
 abstract class ScienceRepository {
   RemoteDataSource dataSource;
@@ -13,4 +14,6 @@ abstract class ScienceRepository {
   Future<List<EventEntity>> fetchEvents();
 
   Future<BeaconEntity> fetchExhibition(Map<String, dynamic> param);
+
+  Future<UserLogEntity> saveUserLog(Map<String, dynamic> param);
 }

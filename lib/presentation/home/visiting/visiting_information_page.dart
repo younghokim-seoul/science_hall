@@ -78,7 +78,7 @@ class VisitingInformationPage extends ConsumerWidget {
                         Expanded(
                             child: Text("개관일", style: theme.textTheme.h30)),
                         Expanded(
-                            child: Text("월,화,수,목,금,토,일",
+                            child: Text("화,수,목,금,토,일",
                                 style: theme.textTheme.h30)),
                       ],
                     )

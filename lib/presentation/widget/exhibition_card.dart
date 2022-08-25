@@ -28,7 +28,7 @@ class ExhibitionCard extends ConsumerWidget {
             ShowRoomImage(imgPath: showRoomEntity.img),
             const Gap(16),
             Expanded(
-                child: Text(showRoomEntity.topic,
+                child: Text(showRoomEntity.showroom,
                     style: theme.textTheme.h30.bold())),
           ],
         ),

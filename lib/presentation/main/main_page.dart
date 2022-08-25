@@ -1,3 +1,4 @@
+import 'package:arc/arc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,13 +8,12 @@ import 'package:science_hall/presentation/theme/app_theme.dart';
 import 'package:science_hall/route/app_route.dart';
 import 'package:science_hall/util/dev_log.dart';
 
+import '../../data/datasource/local/save_user_provider.dart';
+
 enum BottomIndex { HOME, LOCATION, PREVIEW, EVENT }
 
 class MainPage extends ConsumerWidget {
-  const MainPage({
-    Key? key,
-  }) : super(key: key);
-
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,11 +34,21 @@ class MainPage extends ConsumerWidget {
           unselectedFontSize: 14,
           showSelectedLabels: true,
           showUnselectedLabels: true,
-          onTap: (index) {
-            if(tabsRouter.activeIndex == index){
+          onTap: (index) async {
+            if (tabsRouter.activeIndex == index) {
               return;
             }
-            if(BottomIndex.LOCATION.index == index){
+
+            if (BottomIndex.PREVIEW.index == index) {
+              var userInfo = await getUserInfo();
+              Log.d(":::userInfo " + userInfo.toString());
+              if (userInfo.isNullOrEmpty) {
+                context.router.push(const SignupRoute());
+                return;
+              }
+            }
+
+            if (BottomIndex.LOCATION.index == index) {
               ref.read(locationStateProvider.notifier).fetchBeacon();
             }
             tabsRouter.setActiveIndex(index);

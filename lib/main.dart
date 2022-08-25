@@ -10,7 +10,6 @@ import 'package:science_hall/presentation/theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await fetchDeviceId();
   runApp(const ProviderScope(child: App()));
 }
 

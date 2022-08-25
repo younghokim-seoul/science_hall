@@ -1,20 +1,21 @@
 import 'dart:io';
 
-import 'package:device_info_plus/device_info_plus.dart';
+
+import 'package:device_info/device_info.dart';
 import 'package:flutter/services.dart';
 import 'package:science_hall/util/dev_log.dart';
 
 Future<String> fetchDeviceId() async {
   final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-  String macId = '';
+  String macId = 'unknown';
   try {
     if (Platform.isAndroid) {
       final androidInfo = await deviceInfoPlugin.androidInfo;
-      macId = androidInfo.host ?? "unknown";
-      print(androidInfo.toMap());
+      macId = androidInfo.androidId;
+      print(macId);
     } else if (Platform.isIOS) {
       final iosInfo = await deviceInfoPlugin.iosInfo;
-      macId = iosInfo.identifierForVendor ?? "unknown";
+      macId = iosInfo.identifierForVendor;
     }
   } on PlatformException {
     macId = "unknown";

@@ -5,6 +5,7 @@ import 'package:science_hall/data/datasource/remote/remote_datasource.dart';
 import 'package:science_hall/domain/entity/beacon_entity.dart';
 import 'package:science_hall/domain/entity/event_entity.dart';
 import 'package:science_hall/domain/entity/token_entity.dart';
+import 'package:science_hall/domain/entity/user_log_entity.dart';
 import 'package:science_hall/domain/repository/science_repository.dart';
 import 'package:science_hall/util/api_url.dart';
 
@@ -33,6 +34,13 @@ class ScienceRepositoryImpl implements ScienceRepository{
   Future<BeaconEntity> fetchExhibition(Map<String, dynamic> param) async {
     var res = await dataSource.request(HttpMethod.GET, ApiUrl.BEACON, param);
     var responseModel = BeaconEntity.fromJson(json.decode(utf8.decode(res.bodyBytes)));
+    return responseModel;
+  }
+
+  @override
+  Future<UserLogEntity> saveUserLog(Map<String, dynamic> param) async {
+    var res = await dataSource.request(HttpMethod.GET, ApiUrl.USER_LOG, param);
+    var responseModel = UserLogEntity.fromJson(json.decode(utf8.decode(res.bodyBytes)));
     return responseModel;
   }
 

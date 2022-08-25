@@ -15,6 +15,6 @@ class _PreViewPageState extends ConsumerState<PreViewPage> {
   @override
   Widget build(BuildContext context) {
     final theme = ref.watch(appThemeProvider);
-    return SignupPage();
+    return Container();
   }
 }

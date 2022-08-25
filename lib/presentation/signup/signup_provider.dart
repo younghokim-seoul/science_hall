@@ -45,15 +45,7 @@ class AgeState extends StateNotifier<List<bool>> {
         if (i == index) state[index] = true else false
     ];
   }
-
-  bool isValid() {
-    for (bool check in state) {
-      if (check) {
-        return true;
-      }
-    }
-    return false;
-  }
+  getCheckIndex() => state.indexWhere((element) =>  element == true) + 1;
 }
 
 class GenderState extends StateNotifier<List<bool>> {
@@ -69,12 +61,6 @@ class GenderState extends StateNotifier<List<bool>> {
     ];
   }
 
-  bool isValid() {
-    for (bool check in state) {
-      if (check) {
-        return true;
-      }
-    }
-    return false;
-  }
+
+   getCheckIndex() => state.indexWhere((element) => element == true) + 1;
 }

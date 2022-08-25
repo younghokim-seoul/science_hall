@@ -4,7 +4,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="science_hall"
+        android:label="국립수산과학관"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"

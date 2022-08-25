@@ -7,8 +7,7 @@ import 'package:science_hall/util/dev_log.dart';
 
 part 'event_provider.freezed.dart';
 
-final eventListStateProvider =
-    StateNotifierProvider.autoDispose<EventListStateNotifier, EventListState>(
+final eventListStateProvider = StateNotifierProvider.autoDispose<EventListStateNotifier, EventListState>(
   (ref) {
     final repository = ref.watch(scienceRepositoryProvider);
     final sateNotifiler = EventListStateNotifier(
