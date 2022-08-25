@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:science_hall/presentation/event/event_page.dart';
+import 'package:science_hall/presentation/event/mission/mission_page.dart';
 import 'package:science_hall/presentation/home/directions/directions_information_page.dart';
 import 'package:science_hall/presentation/home/exhibition/detail/detail_exhibition_page.dart';
 import 'package:science_hall/presentation/home/exhibition/exhibition_information_page.dart';
@@ -73,6 +74,10 @@ export 'app_route.gr.dart';
     AutoRoute(
       path: '/signup',
       page: SignupPage,
+    ),
+    AutoRoute(
+      path: '/mission',
+      page: MissionPage,
     ),
   ],
 )

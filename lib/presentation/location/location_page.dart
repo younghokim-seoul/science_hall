@@ -55,14 +55,14 @@ class _LocationPageState extends ConsumerState<LocationPage> {
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 20),
         child: Column(children: [
+          Gap(30.h),
           Stack(
             children: [
               CachedImageCard(
-                imageUrl:
-                    "https://smartseas.kr${locationState.location!.inner_exhibition.exhibition?.drawing_image ?? "unkwon"}",
+                imageUrl: "https://smartseas.kr${locationState.location!.inner_exhibition.exhibition?.drawing_image ?? "unkwon"}",
                 height: 250.h,
                 width: double.infinity,
-                fit: BoxFit.fill,
+                fit: BoxFit.fitWidth,
               ),
               Positioned(
                   top: 250.h *
@@ -77,16 +77,17 @@ class _LocationPageState extends ConsumerState<LocationPage> {
                       color: theme.appColors.signIn,
                     ),
                     width: 70.w,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       children: [
+                        const Gap(5),
                         Assets.images.location.image(),
                         const Gap(5),
                         const Expanded(
                             child: Text("현재위치",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12))),
+                        const Gap(5),
                       ],
                     ),
                   )),
