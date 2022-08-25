@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:kakaomap_webview/kakaomap_webview.dart';
 import 'package:science_hall/gen/assets.gen.dart';
 import 'package:science_hall/presentation/theme/app_text_theme.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
@@ -42,10 +43,7 @@ class DirectionsInformationPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Gap(10),
-              SizedBox(
-                  width: double.infinity,
-                  height: 300.h,
-                  child: Assets.images.place.image(fit: BoxFit.cover)),
+              _getKaKaoMap(context),
               const Gap(20),
               BorderBoxItem(
                   img: Assets.images.locationInfo01,
@@ -95,6 +93,19 @@ class DirectionsInformationPage extends ConsumerWidget {
     );
   }
 }
+
+Widget _getKaKaoMap(BuildContext context) =>  KakaoMapView(
+    width: MediaQuery.of(context).size.width,
+    height: 300.h,
+    kakaoMapKey: "c69368553e22c399f47cf1a9d397713e",
+    lat: 35.1934284,
+    lng: 129.2243149,
+    showMapTypeControl: false,
+    showZoomControl: true,
+    markerImageURL: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
+    onTapMarker: (message) {
+      //event callback when the marker is tapped
+    });
 
 class LocationInfoBox extends StatelessWidget {
   const LocationInfoBox(
