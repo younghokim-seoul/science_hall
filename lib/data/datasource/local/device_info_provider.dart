@@ -12,7 +12,7 @@ Future<String> fetchDeviceId() async {
     if (Platform.isAndroid) {
       final androidInfo = await deviceInfoPlugin.androidInfo;
       macId = androidInfo.androidId;
-      print(macId);
+      Log.d(macId);
     } else if (Platform.isIOS) {
       final iosInfo = await deviceInfoPlugin.iosInfo;
       macId = iosInfo.identifierForVendor;

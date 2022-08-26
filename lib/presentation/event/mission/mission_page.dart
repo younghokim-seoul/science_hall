@@ -107,6 +107,7 @@ class _MissionArchiveCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(appThemeProvider);
     final footPrintResult = ref.watch(footPrintProvider);
     return footPrintResult.when(
       error: (error, stackTrace) => Container(),
@@ -152,7 +153,7 @@ class _MissionArchiveCard extends ConsumerWidget {
                               ),
                             ),
                             Gap(10.h),
-                            Text(eventEntity.inner_exhibition[index].name)
+                            Text(eventEntity.inner_exhibition[index].name,style: theme.textTheme.h20,)
                           ],
                         ),
                       ),

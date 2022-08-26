@@ -23,16 +23,11 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver {
-
-
+class _HomePageState extends ConsumerState<HomePage>  {
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
-
-
     ref.read(beaconProvider).beaconState.stream.listen((event) async {
       String latestUUID = await getBeaconUUID();
       var ranging = event;
@@ -56,18 +51,12 @@ class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver
             //최신 uuid의 로그를 쏴야함.. 관람실 정보등록을위해.
           }
         }
-        // await ref.read(locationStateProvider.notifier).saveUserLog(ranging.region.proximityUUID!);
+
       }
     });
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
-    Log.d('AppLifecycleState = $state');
-    if (state == AppLifecycleState.detached) {
-      await ref.read(beaconProvider).release();
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {

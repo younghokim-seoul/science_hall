@@ -21,7 +21,7 @@ class LocationPage extends ConsumerStatefulWidget {
 class _LocationPageState extends ConsumerState<LocationPage> {
   @override
   void initState() {
-    ref.read(locationStateProvider.notifier).fetchBeacon();
+    ref.read(locationStateProvider.notifier).fetchLatestExhibition();
     super.initState();
   }
 
@@ -29,10 +29,10 @@ class _LocationPageState extends ConsumerState<LocationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
     final theme = ref.watch(appThemeProvider);
     final locationState = ref.watch(locationStateProvider);
 
-    final double width = MediaQuery.of(context).size.width;
 
     if (locationState.isLoading || locationState.location.isNullOrEmpty) {
       return const LoadingIndicator();
