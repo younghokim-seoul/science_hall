@@ -9,7 +9,7 @@ final footPrintProvider = FutureProvider.autoDispose<FootPrintEntity?>((ref) asy
   var userInfo = await getUserInfo();
   if(userInfo != null){
     Log.d("::::userInfo " + userInfo.toString());
-    var footPrintEntity = await repository.fetchFootPrint("fae74d8a49bc53d6");
+    var footPrintEntity = await repository.fetchFootPrint(userInfo.mac_address);
     return footPrintEntity;
   }
   return null;
