@@ -18,15 +18,15 @@ class HttpRequest implements RemoteDataSource {
     Map<String, String> header;
     header = {"Content-Type": "application/json"};
 
-    if (path != ApiUrl.TOKEN) {
-      if (path != ApiUrl.BEACON) {
-        final SharedPreferences pref = await SharedPreferences.getInstance();
-        if (!pref.getString("token").isNullOrEmpty) {
-          header = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT ${pref.getString("token")!}"
-          };
-        }
+    if (path == ApiUrl.EVENT || path == ApiUrl.VISITED_LOG) {
+      final SharedPreferences pref = await SharedPreferences.getInstance();
+      if (!pref.getString("token").isNullOrEmpty) {
+
+        Log.i(":::JWT => ${pref.getString("token")}");
+        header = {
+          "Content-Type": "application/json",
+          "Authorization": "JWT ${pref.getString("token")!}"
+        };
       }
     }
 

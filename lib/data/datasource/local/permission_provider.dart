@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:device_info/device_info.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-final beaconPermissionProvider = FutureProvider<bool>((ref) async {
+Future<bool> checkBeaconReady() async {
   if (Platform.isIOS){
     await [Permission.bluetoothScan,Permission.location].request();
     return await Permission.bluetoothScan.isGranted && await Permission.location.isGranted;
@@ -19,4 +18,6 @@ final beaconPermissionProvider = FutureProvider<bool>((ref) async {
       return await Permission.bluetoothScan.isGranted && await Permission.location.isGranted && await Permission.bluetoothConnect.isGranted;
     }
   }
-});
+}
+
+

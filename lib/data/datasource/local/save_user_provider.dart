@@ -6,9 +6,9 @@ import 'package:science_hall/domain/entity/survey_entity.dart';
 import 'package:science_hall/util/api_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> saveUserInfo(int age,int gender) async {
+Future<void> saveUserInfo(int age,int sex) async {
   String macId = await fetchDeviceId();
-  var entity = SurveyEntity(sex: gender, age_group: age, mac_address: macId);
+  var entity = SurveyEntity(sex: sex, age_group: age, mac_address: macId);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString(ApiUrl.LOCAL_USER_INFO, jsonEncode(entity));
 }

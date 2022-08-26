@@ -22,6 +22,7 @@ class BeaconManager extends ReactiveBeaconState {
 
   bool get locationServiceEnabled => locationService;
 
+
   final regions = <Region>[
     Region(
         identifier: 'Bluno',
@@ -37,18 +38,15 @@ class BeaconManager extends ReactiveBeaconState {
     locationService = await flutterBeacon.checkLocationServicesIfEnabled;
     Log.d(":::bluetoothState $bluetoothState authorizationStatus $authorizationStatus locationServiceEnabled $locationServiceEnabled");
 
-    bool isReady =
-        bluetoothEnabled && authorizationStatusOk && locationServiceEnabled;
+    bool isReady = bluetoothEnabled && authorizationStatusOk && locationServiceEnabled;
     await startScan(isReady);
   }
 
   Future<void> startScan(bool isReady) async {
     Log.d("::::startScan");
-    if (_subscription != null) await stopScan();
+    if (_subscription != null) await _stopScan();
 
-
-    _subscription =
-        flutterBeacon.ranging(regions).listen((RangingResult result) {
+    _subscription = flutterBeacon.ranging(regions).listen((RangingResult result) {
       // Log.d(result.toString());
       if(result.beacons.isNotEmpty){
         int rssi = result.beacons.first.rssi;
@@ -59,14 +57,21 @@ class BeaconManager extends ReactiveBeaconState {
     });
   }
 
-  Future<void> stopScan() async {
+  Future<void> _stopScan() async {
     Log.d('Stop ble discovery');
     await _subscription?.cancel();
     _subscription = null;
   }
 
-  Future<void> dispose() async {
+  Future<void> _dispose() async {
     await beaconState.close();
+  }
+
+  Future<void> release() async {
+    Log.d(":::릴리즈시작...");
+    await _stopScan();
+    await _dispose();
+    Log.d(":::릴리즈종료..");
   }
 
   @override

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:science_hall/data/datasource/local/device_info_provider.dart';
 import 'package:science_hall/data/datasource/remote/mock_data_store.dart';
 import 'package:science_hall/data/datasource/repositoryimpl/repository_provider.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';

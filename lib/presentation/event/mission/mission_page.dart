@@ -1,15 +1,25 @@
+import 'package:arc/arc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:gap/gap.dart';
+import 'package:science_hall/domain/entity/event_entity.dart';
 import 'package:science_hall/gen/assets.gen.dart';
+import 'package:science_hall/presentation/event/mission/mission_provider.dart';
 import 'package:science_hall/presentation/theme/app_text_theme.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
+import 'package:science_hall/util/dev_log.dart';
 
 class MissionPage extends ConsumerWidget {
   const MissionPage({
     Key? key,
+    required this.eventEntity,
   }) : super(key: key);
+
+  final EventEntity eventEntity;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,7 +44,7 @@ class MissionPage extends ConsumerWidget {
                   borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
                   color: Color(0xfff8f8f8),
                 ),
-                child: Container(),
+                child: _MissionArchiveCard(eventEntity: eventEntity),
               ),
             ),
           ],
@@ -48,7 +58,8 @@ class MissionPage extends ConsumerWidget {
           Positioned(
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.only(bottom: 180,left: 20,right: 20,top: 20),
+              padding: const EdgeInsets.only(
+                  bottom: 180, left: 20, right: 20, top: 20),
               child: RichText(
                   text: const TextSpan(
                 children: [
@@ -83,5 +94,83 @@ class MissionPage extends ConsumerWidget {
         ],
       ),
     );
+  }
+}
+
+class _MissionArchiveCard extends ConsumerWidget {
+  const _MissionArchiveCard({
+    Key? key,
+    required this.eventEntity,
+  }) : super(key: key);
+
+  final EventEntity eventEntity;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final footPrintResult = ref.watch(footPrintProvider);
+    return footPrintResult.when(
+      error: (error, stackTrace) => Container(),
+      loading: () => Container(),
+      data: (items) {
+        if (items.isNullOrEmpty) return Container();
+        return Padding(
+          padding: const EdgeInsets.all(20),
+          child: AnimationLimiter(
+            child: GridView.count(
+              childAspectRatio: 1 / 1.2,
+              padding: const EdgeInsets.all(8.0),
+              crossAxisCount: 3,
+              children: List.generate(
+                eventEntity.inner_exhibition.length,
+                (int index) {
+                  return AnimationConfiguration.staggeredGrid(
+                    columnCount: 3,
+                    position: index,
+                    duration: const Duration(milliseconds: 375),
+                    child: ScaleAnimation(
+                      scale: 0.5,
+                      child: FadeInAnimation(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 70.h,
+                              height: 70.h,
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.white,
+                              ),
+                              child: Center(
+                                child: _isMissionClear(
+                                            items!.result,
+                                            eventEntity
+                                                .inner_exhibition[index]) ==
+                                        true
+                                    ? Assets.svgs.acquired.svg()
+                                    : Assets.svgs.acquiredNo.svg(),
+                              ),
+                            ),
+                            Gap(10.h),
+                            Text(eventEntity.inner_exhibition[index].name)
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  bool _isMissionClear(
+      List<int> userVisited, InnerExhibitionEntity missionEventList) {
+    return userVisited
+        .where((element) => element == missionEventList.pk)
+        .isNotEmpty;
   }
 }

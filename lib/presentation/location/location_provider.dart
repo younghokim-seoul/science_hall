@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:science_hall/data/datasource/local/save_beacon_provider.dart';
+import 'package:science_hall/data/datasource/local/save_user_provider.dart';
 import 'package:science_hall/di_container.dart';
 import 'package:science_hall/domain/entity/beacon_entity.dart';
-import 'package:science_hall/domain/entity/event_entity.dart';
 import 'package:science_hall/domain/repository/science_repository.dart';
 import 'package:science_hall/util/dev_log.dart';
 
@@ -27,8 +28,9 @@ class LocationStateNotifier extends StateNotifier<LocationState> {
 
   Future<void> fetchBeacon() async {
     try {
+      String macUuid = await getBeaconUUID();
       Map<String, dynamic> param = {};
-      param['uuid'] = "E2C56DB5-DFFB-48D2-B060-D0F5A71096E0";
+      param['uuid'] = macUuid;
       final response = await scienceRepository.fetchExhibition(param);
       if(mounted){
         state = state.copyWith(
@@ -38,10 +40,27 @@ class LocationStateNotifier extends StateNotifier<LocationState> {
         );
       }
     } catch (e,print) {
-      Log.d(":::print " + print.toString());
+      Log.d(":::[fetchBeacon]  " + print.toString());
       if(mounted){
         state = state.copyWith(error: e, isLoading: false);
       }
+    }
+  }
+
+  Future<void> saveUserLog(String uuid) async {
+    try {
+      var userInfo = await getUserInfo();
+      if (userInfo != null) {
+        Log.d("userInfo " + userInfo.toString());
+        Map<String, dynamic> param = {};
+        param['sex'] = userInfo.sex;
+        param['age_group'] = userInfo.age_group;
+        param['mac_address'] = userInfo.mac_address;
+        await scienceRepository.saveUserLog(uuid,param);
+      }
+    } catch (e,print) {
+      Log.d(":::[saveUserLog]  "  + e.toString());
+      Log.d(":::[saveUserLog]  " + print.toString());
     }
   }
 }

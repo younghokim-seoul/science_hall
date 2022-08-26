@@ -15,6 +15,7 @@ import 'package:auto_route/auto_route.dart' as _i16;
 import 'package:flutter/cupertino.dart' as _i18;
 import 'package:flutter/material.dart' as _i17;
 
+import '../domain/entity/event_entity.dart' as _i20;
 import '../domain/entity/show_room_entity.dart' as _i19;
 import '../presentation/event/detail/event_detail_page.dart' as _i8;
 import '../presentation/event/event_page.dart' as _i12;
@@ -72,12 +73,17 @@ class AppRouter extends _i16.RootStackRouter {
           routeData: routeData, child: const _i6.SignupPage());
     },
     MissionRoute.name: (routeData) {
+      final args = routeData.argsAs<MissionRouteArgs>();
       return _i16.CupertinoPageX<dynamic>(
-          routeData: routeData, child: const _i7.MissionPage());
+          routeData: routeData,
+          child: _i7.MissionPage(key: args.key, eventEntity: args.eventEntity));
     },
     EventDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<EventDetailRouteArgs>();
       return _i16.CupertinoPageX<dynamic>(
-          routeData: routeData, child: const _i8.EventDetailPage());
+          routeData: routeData,
+          child: _i8.EventDetailPage(
+              key: args.key, eventEntity: args.eventEntity));
     },
     HomeRoute.name: (routeData) {
       return _i16.CupertinoPageX<dynamic>(
@@ -218,19 +224,50 @@ class SignupRoute extends _i16.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.MissionPage]
-class MissionRoute extends _i16.PageRouteInfo<void> {
-  const MissionRoute() : super(MissionRoute.name, path: '/mission');
+class MissionRoute extends _i16.PageRouteInfo<MissionRouteArgs> {
+  MissionRoute({_i18.Key? key, required _i20.EventEntity eventEntity})
+      : super(MissionRoute.name,
+            path: '/mission',
+            args: MissionRouteArgs(key: key, eventEntity: eventEntity));
 
   static const String name = 'MissionRoute';
 }
 
+class MissionRouteArgs {
+  const MissionRouteArgs({this.key, required this.eventEntity});
+
+  final _i18.Key? key;
+
+  final _i20.EventEntity eventEntity;
+
+  @override
+  String toString() {
+    return 'MissionRouteArgs{key: $key, eventEntity: $eventEntity}';
+  }
+}
+
 /// generated route for
 /// [_i8.EventDetailPage]
-class EventDetailRoute extends _i16.PageRouteInfo<void> {
-  const EventDetailRoute()
-      : super(EventDetailRoute.name, path: '/detail_event');
+class EventDetailRoute extends _i16.PageRouteInfo<EventDetailRouteArgs> {
+  EventDetailRoute({_i18.Key? key, required _i20.EventEntity eventEntity})
+      : super(EventDetailRoute.name,
+            path: '/detail_event',
+            args: EventDetailRouteArgs(key: key, eventEntity: eventEntity));
 
   static const String name = 'EventDetailRoute';
+}
+
+class EventDetailRouteArgs {
+  const EventDetailRouteArgs({this.key, required this.eventEntity});
+
+  final _i18.Key? key;
+
+  final _i20.EventEntity eventEntity;
+
+  @override
+  String toString() {
+    return 'EventDetailRouteArgs{key: $key, eventEntity: $eventEntity}';
+  }
 }
 
 /// generated route for

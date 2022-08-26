@@ -18,6 +18,8 @@ class MainPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
+
+
     return AutoTabsScaffold(
       routes: const [
         HomeRoute(),
@@ -47,7 +49,6 @@ class MainPage extends ConsumerWidget {
                 return;
               }
             }
-
             if (BottomIndex.LOCATION.index == index) {
               ref.read(locationStateProvider.notifier).fetchBeacon();
             }

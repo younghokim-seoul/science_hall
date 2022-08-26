@@ -29,11 +29,13 @@ class TabFirstFloorPage extends ConsumerWidget {
                       return AnimationConfiguration.staggeredList(
                         position: index,
                         duration: const Duration(milliseconds: 375),
-                        child: SlideAnimation(
-                            verticalOffset: 44.0,
-                            child: ExhibitionCard(
-                                showRoomEntity: items[index],
-                                onTap: () => context.router.push(DetailExhibitionRoute(showRoomEntity: items[index]))
+                        child: ScaleAnimation(
+                            scale: 0.5,
+                            child: FadeInAnimation(
+                              child: ExhibitionCard(
+                                  showRoomEntity: items[index],
+                                  onTap: () => context.router.push(DetailExhibitionRoute(showRoomEntity: items[index]))
+                              ),
                             )),
                       );
                     }),

@@ -22,11 +22,6 @@ class _PreViewPageState extends ConsumerState<PreViewPage> {
   @override
   Widget build(BuildContext context) {
     final theme = ref.watch(appThemeProvider);
-    final beaconManager = ref.watch(beaconProvider);
-
-    beaconManager.state.listen((event) {
-      Log.d(":::::::::::비콘 정보.. " + event.toString());
-    });
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -46,10 +41,5 @@ class _PreViewPageState extends ConsumerState<PreViewPage> {
               ),
           ),
         ));
-  }
-
-  @override
-  void initState() {
-
   }
 }
