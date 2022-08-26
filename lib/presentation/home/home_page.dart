@@ -1,7 +1,6 @@
 import 'package:arc/arc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -23,8 +22,7 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage>  {
-
+class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -46,21 +44,19 @@ class _HomePageState extends ConsumerState<HomePage>  {
             //최신 uuid의... 관람실의 위치
             Log.d("유저 로그전달");
             await ref.read(locationStateProvider.notifier).fetchBeacon();
-            await ref.read(locationStateProvider.notifier).saveUserLog(ranging.region.proximityUUID!);
+            await ref
+                .read(locationStateProvider.notifier)
+                .saveUserLog(ranging.region.proximityUUID!);
 
             //최신 uuid의 로그를 쏴야함.. 관람실 정보등록을위해.
           }
         }
-
       }
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-
     final beaconManager = ref.watch(beaconProvider);
 
     return Scaffold(
@@ -92,7 +88,6 @@ class _HomePageState extends ConsumerState<HomePage>  {
       ),
     );
   }
-
 }
 
 Widget _header = SizedBox(
