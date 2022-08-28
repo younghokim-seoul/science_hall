@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:science_hall/data/datasource/beacon/beacon_manager.dart';
 import 'package:science_hall/data/datasource/local/permission_provider.dart';
 import 'package:science_hall/data/datasource/local/save_beacon_provider.dart';
 import 'package:science_hall/data/datasource/local/save_user_provider.dart';
@@ -22,42 +23,56 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver {
+
+  var beaconManger = it<BeaconManager>();
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
-    ref.read(beaconProvider).beaconState.stream.listen((event) async {
-      String latestUUID = await getBeaconUUID();
-      var ranging = event;
-      Log.d("ranging " + ranging.toString());
-      if (ranging.beacons.isNotEmpty) {
-        //비콘이 감지되었을떄.
-        if (latestUUID != ranging.region.proximityUUID) {
-          //가장 최근 uuid와 감지된 비콘 uuid가 다르다면
-          Log.d("가장 최근 uuid와 감지된 비콘 uuid가 다르다면");
-          if (!ranging.region.proximityUUID.isNullOrEmpty) {
-            //최신 uuid로 저장
-            Log.d("최신 uuid로 저장");
-            await saveBeaconUUID(ranging.region.proximityUUID!);
-            //최신 uuid의... 관람실 정보..
 
-            //최신 uuid의... 관람실의 위치
-            Log.d("유저 로그전달");
-            await ref.read(locationStateProvider.notifier).fetchBeacon();
-            await ref
-                .read(locationStateProvider.notifier)
-                .saveUserLog(ranging.region.proximityUUID!);
+    // beaconManger.beaconState.stream.listen((event) async {
+    //   String latestUUID = await getBeaconUUID();
+    //   var ranging = event;
+    //   Log.d("ranging " + ranging.toString());
+    //   if (ranging.beacons.isNotEmpty) {
+    //     //비콘이 감지되었을떄.
+    //     if (latestUUID != ranging.region.proximityUUID) {
+    //       //가장 최근 uuid와 감지된 비콘 uuid가 다르다면
+    //       Log.d("가장 최근 uuid와 감지된 비콘 uuid가 다르다면");
+    //       if (!ranging.region.proximityUUID.isNullOrEmpty) {
+    //         //최신 uuid로 저장
+    //         Log.d("최신 uuid로 저장");
+    //         await saveBeaconUUID(ranging.region.proximityUUID!);
+    //         //최신 uuid의... 관람실 정보..
+    //
+    //         //최신 uuid의... 관람실의 위치
+    //         Log.d("유저 로그전달");
+    //         await ref.read(locationStateProvider.notifier).fetchBeacon();
+    //         await ref.read(locationStateProvider.notifier).saveUserLog(ranging.region.proximityUUID!);
+    //
+    //         //최신 uuid의 로그를 쏴야함.. 관람실 정보등록을위해.
+    //       }
+    //     }
+    //   }
+    // });
+  }
 
-            //최신 uuid의 로그를 쏴야함.. 관람실 정보등록을위해.
-          }
-        }
-      }
-    });
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    Log.d('AppLifecycleState = $state');
+    if (state == AppLifecycleState.resumed) {
+      beaconManger.check();
+    } else if (state == AppLifecycleState.paused) {
+      await beaconManger.pauseScanBeacon();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final beaconManager = ref.watch(beaconProvider);
+
 
     return Scaffold(
       backgroundColor: const Color(0xfff0f0f0),
@@ -77,7 +92,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   final checkPermission = await checkBeaconReady();
                   Log.i("checkPermission => $checkPermission");
                   if (checkPermission) {
-                    beaconManager.check();
+                    beaconManger.check();
                   }
                 }
               },

@@ -4,7 +4,6 @@ import 'package:science_hall/data/datasource/local/save_beacon_provider.dart';
 import 'package:science_hall/data/datasource/local/save_user_provider.dart';
 import 'package:science_hall/di_container.dart';
 import 'package:science_hall/domain/entity/beacon_entity.dart';
-import 'package:science_hall/domain/entity/event_entity.dart';
 import 'package:science_hall/domain/repository/science_repository.dart';
 import 'package:science_hall/util/dev_log.dart';
 
@@ -46,10 +45,7 @@ class LocationStateNotifier extends StateNotifier<LocationState> {
       final response = await scienceRepository.fetchExhibition(param);
       await saveLatestExhibition(response);
     } catch (e,print) {
-      Log.d(":::[fetchBeacon]  " + print.toString());
-      if(mounted){
-        state = state.copyWith(error: e, isLoading: false);
-      }
+      Log.d(":::[fetchBeacon error]  " + print.toString());
     }
   }
 
@@ -65,8 +61,8 @@ class LocationStateNotifier extends StateNotifier<LocationState> {
         await scienceRepository.saveUserLog(uuid,param);
       }
     } catch (e,print) {
-      Log.d(":::[saveUserLog]  "  + e.toString());
-      Log.d(":::[saveUserLog]  " + print.toString());
+      Log.d(":::[saveUserLog error]  "  + e.toString());
+      Log.d(":::[saveUserLog error]  " + print.toString());
     }
   }
 }

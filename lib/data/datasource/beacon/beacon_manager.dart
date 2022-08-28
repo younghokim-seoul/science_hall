@@ -86,21 +86,25 @@ class BeaconManager extends ReactiveBeaconState {
     bluetoothState = await flutterBeacon.bluetoothState;
     authorizationStatus = await flutterBeacon.authorizationStatus;
     locationService = await flutterBeacon.checkLocationServicesIfEnabled;
-    Log.d(
-        ":::bluetoothState $bluetoothState authorizationStatus $authorizationStatus locationServiceEnabled $locationServiceEnabled");
+    Log.d(":::bluetoothState $bluetoothState authorizationStatus $authorizationStatus locationServiceEnabled $locationServiceEnabled");
 
-    bool isReady =
-        bluetoothEnabled && authorizationStatusOk && locationServiceEnabled;
+    bool isReady = bluetoothEnabled && authorizationStatusOk && locationServiceEnabled;
     await startScan(isReady);
   }
 
   Future<void> startScan(bool isReady) async {
-    Log.d("::::startScan");
-    if (_subscription != null) await _stopScan();
+    Log.d("::::SCANING....");
+    if (_subscription != null) {
+      Log.d("::::PUASE 체크......");
+      if (_subscription!.isPaused) {
+        Log.d("::::RESUME 체크......");
+        _subscription?.resume();
+        return;
+      }
+    }
 
     Log.d("::::regions size " + regions.length.toString());
-    _subscription =
-        flutterBeacon.ranging(regions).listen((RangingResult result) {
+    _subscription = flutterBeacon.ranging(regions).listen((RangingResult result) {
       // Log.d(result.toString());
       if (result.beacons.isNotEmpty) {
         int rssi = result.beacons.first.rssi;
@@ -111,19 +115,21 @@ class BeaconManager extends ReactiveBeaconState {
     });
   }
 
-  Future<void> _stopScan() async {
-    Log.d('Stop ble discovery');
+  pauseScanBeacon() async {
+    Log.d('pauseScanBeacon');
+    _subscription?.pause();
+  }
+
+
+  Future<void> _dispose() async {
+    Log.d('dispose');
+    await beaconState.close();
     await _subscription?.cancel();
     _subscription = null;
   }
 
-  Future<void> _dispose() async {
-    await beaconState.close();
-  }
-
   Future<void> release() async {
     Log.d(":::릴리즈시작...");
-    await _stopScan();
     await _dispose();
     Log.d(":::릴리즈종료..");
   }

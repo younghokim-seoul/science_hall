@@ -54,7 +54,7 @@ class MainPage extends ConsumerWidget {
             }
             if (BottomIndex.LOCATION.index == index ||
                 BottomIndex.PREVIEW.index == index) {
-              ref.read(locationStateProvider.notifier).fetchLatestExhibition();
+              // ref.read(locationStateProvider.notifier).fetchLatestExhibition();
             }
 
             tabsRouter.setActiveIndex(index);
