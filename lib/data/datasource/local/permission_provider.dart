@@ -20,4 +20,18 @@ Future<bool> checkBeaconReady() async {
   }
 }
 
+Future<bool> checkPermission() async {
+  if (Platform.isIOS){
+    return await Permission.bluetoothScan.isGranted && await Permission.location.isGranted;
+  }else{
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    if (Platform.isAndroid && androidInfo.version.sdkInt <= 30) {
+      return await Permission.location.isGranted;
+    } else {
+      return await Permission.bluetoothScan.isGranted && await Permission.location.isGranted && await Permission.bluetoothConnect.isGranted;
+    }
+  }
+}
+
 

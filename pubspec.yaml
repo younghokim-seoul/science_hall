@@ -47,7 +47,6 @@ dependencies:
   permission_handler: ^10.0.0
   pull_to_refresh_flutter3: ^2.0.1
   kakaomap_webview: ^0.6.2
-  flutter_native_splash: ^2.2.8
   fluttertoast: ^8.0.9
 
 
@@ -81,22 +80,3 @@ flutter:
 
 
 
-
-
-flutter_native_splash:
-  color: "#e1f5fe"
-  image: assets/images/logo_lockup_flutter_vertical.png
-  color_dark: "#042a49"
-  image_dark: assets/images/logo_lockup_flutter_vertical_wht.png
-  android: true
-  ios: true
-  fullscreen: true
-
-android_12:
-  color: "#e1f5fe"
-  image: assets/images/logo_lockup_flutter_vertical.png
-  color_dark: "#042a49"
-  image_dark: assets/images/logo_lockup_flutter_vertical_wht.png
-  android: true
-  ios: true
-  fullscreen: true

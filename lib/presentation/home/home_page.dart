@@ -21,8 +21,8 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver {
-
+class _HomePageState extends ConsumerState<HomePage>
+    with WidgetsBindingObserver {
   var beaconManger = it<BeaconManager>();
 
   @override
@@ -31,13 +31,13 @@ class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver
     super.initState();
   }
 
-
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     Log.d('AppLifecycleState = $state');
+
     if (state == AppLifecycleState.resumed) {
-      beaconManger.check();
+      var check = await checkPermission();
+      if (check) beaconManger.check();
     } else if (state == AppLifecycleState.paused) {
       await beaconManger.pauseScanBeacon();
     }
@@ -45,8 +45,6 @@ class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: const Color(0xfff0f0f0),
       body: SingleChildScrollView(
