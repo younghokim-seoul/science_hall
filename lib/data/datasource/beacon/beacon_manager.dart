@@ -1,11 +1,19 @@
 import 'dart:async';
 import 'dart:core';
+
+import 'package:arc/arc.dart';
 import 'package:arc/arc_subject.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
-import 'package:science_hall/data/datasource/beacon/reactive_beacon_state.dart';
+import 'package:science_hall/data/datasource/local/save_beacon_provider.dart';
+import 'package:science_hall/data/datasource/local/save_user_provider.dart';
+import 'package:science_hall/di_container.dart';
+import 'package:science_hall/domain/repository/science_repository.dart';
 import 'package:science_hall/util/dev_log.dart';
 
-class BeaconManager extends ReactiveBeaconState {
+class BeaconManager {
+
+  final _scienceRepository = it<ScienceRepository>();
+
   var bluetoothState = BluetoothState.stateOff;
   var authorizationStatus = AuthorizationStatus.notDetermined;
   var locationService = false;
@@ -98,18 +106,29 @@ class BeaconManager extends ReactiveBeaconState {
       Log.d("::::PUASE 체크......");
       if (_subscription!.isPaused) {
         Log.d("::::RESUME 체크......");
-        _subscription?.resume();
         return;
       }
     }
 
     Log.d("::::regions size " + regions.length.toString());
-    _subscription = flutterBeacon.ranging(regions).listen((RangingResult result) {
-      // Log.d(result.toString());
-      if (result.beacons.isNotEmpty) {
+    _subscription = flutterBeacon.ranging(regions).listen((RangingResult result) async {
+      if (!result.beacons.isNullOrEmpty) {
         int rssi = result.beacons.first.rssi;
-        if (rssi.abs() >= 35 && rssi.abs() <= 99) {
-          beaconState.val = result;
+        if (rssi.abs() >= 35 && rssi.abs() <= 99 && result.beacons.length == 1) {
+          String latestUUID = await getBeaconUUID();
+          if (latestUUID != result.beacons.first.proximityUUID) {
+            //가장 최근 uuid와 감지된 비콘 uuid가 다르다면?
+            // Log.d("가장 최근 uuid와 감지된 비콘 uuid가 다르다면?");
+            if (!result.beacons.first.proximityUUID.isNullOrEmpty) {
+              //비콘에 포함된 proximityUUID가 null이 아니라면?
+              // Log.d("비콘에 포함된 proximityUUID가 null이 아니라면? => 비콘 정보저장 및 비콘 정보호출");
+              await saveBeaconUUID(result.beacons.first.proximityUUID);
+              await fetchBeacon();
+              await saveUserLog(result.beacons.first.proximityUUID);
+              beaconState.val = result;
+            }
+          }
+
         }
       }
     });
@@ -118,6 +137,8 @@ class BeaconManager extends ReactiveBeaconState {
   pauseScanBeacon() async {
     Log.d('pauseScanBeacon');
     _subscription?.pause();
+    await _subscription?.cancel();
+    _subscription = null;
   }
 
 
@@ -134,6 +155,34 @@ class BeaconManager extends ReactiveBeaconState {
     Log.d(":::릴리즈종료..");
   }
 
-  @override
-  Stream get state => beaconState.stream;
+  Future<void> fetchBeacon() async {
+    try {
+      String macUuid = await getBeaconUUID();
+      Map<String, dynamic> param = {};
+      param['uuid'] = macUuid;
+      final response = await _scienceRepository.fetchExhibition(param);
+      await saveLatestExhibition(response);
+    } catch (e,print) {
+      Log.d(":::[fetchBeacon error]  " + print.toString());
+    }
+  }
+
+  Future<void> saveUserLog(String uuid) async {
+    try {
+      var userInfo = await getUserInfo();
+      if (userInfo != null) {
+        Log.d("userInfo " + userInfo.toString());
+        Map<String, dynamic> param = {};
+        param['sex'] = userInfo.sex;
+        param['age_group'] = userInfo.age_group;
+        param['mac_address'] = userInfo.mac_address;
+        await _scienceRepository.saveUserLog(uuid,param);
+      }
+    } catch (e,print) {
+      Log.d(":::[saveUserLog error]  "  + e.toString());
+      Log.d(":::[saveUserLog error]  " + print.toString());
+    }
+  }
+
+
 }

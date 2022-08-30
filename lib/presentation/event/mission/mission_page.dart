@@ -11,6 +11,7 @@ import 'package:science_hall/gen/assets.gen.dart';
 import 'package:science_hall/presentation/event/mission/mission_provider.dart';
 import 'package:science_hall/presentation/theme/app_text_theme.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
+import 'package:science_hall/presentation/widget/loading_indicator.dart';
 import 'package:science_hall/util/dev_log.dart';
 
 class MissionPage extends ConsumerWidget {
@@ -111,7 +112,7 @@ class _MissionArchiveCard extends ConsumerWidget {
     final footPrintResult = ref.watch(footPrintProvider);
     return footPrintResult.when(
       error: (error, stackTrace) => Container(),
-      loading: () => Container(),
+      loading: () => const LoadingIndicator(),
       data: (items) {
         if (items.isNullOrEmpty) return Container();
         return Padding(

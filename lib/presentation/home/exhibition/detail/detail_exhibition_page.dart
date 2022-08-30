@@ -25,7 +25,7 @@ class DetailExhibitionPage extends ConsumerWidget {
           child: const Icon(CupertinoIcons.back, color: Colors.black),
         ),
         centerTitle: true,
-        title: Text(showRoomEntity.topic, style: theme.textTheme.h40.bold()),
+        title: Text(showRoomEntity.showroom, style: theme.textTheme.h40.bold()),
         backgroundColor: theme.appColors.background,
       ),
       body: Padding(
@@ -35,7 +35,7 @@ class DetailExhibitionPage extends ConsumerWidget {
             const Gap(10),
             SizedBox(height: 300.h, child: Image.asset(showRoomEntity.img, fit: BoxFit.cover)),
             const Gap(20),
-            Text(showRoomEntity.topic,style: theme.textTheme.h30,)
+            Text(showRoomEntity.contents,style: theme.textTheme.h30,)
           ],
         ),
       ),

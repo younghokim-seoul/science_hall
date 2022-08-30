@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:science_hall/data/datasource/local/save_beacon_provider.dart';
 import 'package:science_hall/gen/assets.gen.dart';
-import 'package:science_hall/presentation/location/location_provider.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
 import 'package:science_hall/route/app_route.dart';
 import 'package:science_hall/util/dev_log.dart';
@@ -52,11 +51,6 @@ class MainPage extends ConsumerWidget {
                 return;
               }
             }
-            if (BottomIndex.LOCATION.index == index ||
-                BottomIndex.PREVIEW.index == index) {
-              // ref.read(locationStateProvider.notifier).fetchLatestExhibition();
-            }
-
             tabsRouter.setActiveIndex(index);
           },
           items: [

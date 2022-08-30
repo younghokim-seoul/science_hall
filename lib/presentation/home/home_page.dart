@@ -6,11 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:science_hall/data/datasource/beacon/beacon_manager.dart';
 import 'package:science_hall/data/datasource/local/permission_provider.dart';
-import 'package:science_hall/data/datasource/local/save_beacon_provider.dart';
 import 'package:science_hall/data/datasource/local/save_user_provider.dart';
 import 'package:science_hall/di_container.dart';
 import 'package:science_hall/gen/assets.gen.dart';
-import 'package:science_hall/presentation/location/location_provider.dart';
 import 'package:science_hall/presentation/widget/action_button.dart';
 import 'package:science_hall/presentation/widget/quick_item.dart';
 import 'package:science_hall/route/app_route.dart';
@@ -26,36 +24,11 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver {
 
   var beaconManger = it<BeaconManager>();
+
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
     super.initState();
-
-    // beaconManger.beaconState.stream.listen((event) async {
-    //   String latestUUID = await getBeaconUUID();
-    //   var ranging = event;
-    //   Log.d("ranging " + ranging.toString());
-    //   if (ranging.beacons.isNotEmpty) {
-    //     //비콘이 감지되었을떄.
-    //     if (latestUUID != ranging.region.proximityUUID) {
-    //       //가장 최근 uuid와 감지된 비콘 uuid가 다르다면
-    //       Log.d("가장 최근 uuid와 감지된 비콘 uuid가 다르다면");
-    //       if (!ranging.region.proximityUUID.isNullOrEmpty) {
-    //         //최신 uuid로 저장
-    //         Log.d("최신 uuid로 저장");
-    //         await saveBeaconUUID(ranging.region.proximityUUID!);
-    //         //최신 uuid의... 관람실 정보..
-    //
-    //         //최신 uuid의... 관람실의 위치
-    //         Log.d("유저 로그전달");
-    //         await ref.read(locationStateProvider.notifier).fetchBeacon();
-    //         await ref.read(locationStateProvider.notifier).saveUserLog(ranging.region.proximityUUID!);
-    //
-    //         //최신 uuid의 로그를 쏴야함.. 관람실 정보등록을위해.
-    //       }
-    //     }
-    //   }
-    // });
   }
 
 

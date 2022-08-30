@@ -50,7 +50,7 @@ class EventDetailPage extends ConsumerWidget {
               Gap(10.h),
               Text("이벤트 기간", style: theme.textTheme.h30.bold()),
               Gap(5.h),
-              Text(_partDate(eventEntity.start_dt) + " ~ " + _partDate(eventEntity.end_dt)),
+              Text("${_partDate(eventEntity.start_dt)} ~ ${_partDate(eventEntity.end_dt)}"),
               Gap(10.h),
               Text("상세설명", style: theme.textTheme.h30.bold()),
               Text(eventEntity.explanation ?? ""),

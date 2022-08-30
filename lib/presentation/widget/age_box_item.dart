@@ -27,11 +27,11 @@ class AgeBoxItem extends ConsumerWidget {
           border: Border.all(color: isCheck ? Colors.transparent : theme.appColors.divider),
         ),
         margin: const EdgeInsets.only(bottom: 10,left: 2),
-      width: width / 3.5,
+      width: width * 0.28,
       child: InkWell(
           onTap: () => onTab(index),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
             child: Text(title, style: TextStyle(color: isCheck ? Colors.white : Colors.black) ),
           ),
         ),

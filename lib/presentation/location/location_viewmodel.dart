@@ -1,16 +1,17 @@
 import 'package:arc/arc_subject.dart';
+import 'package:science_hall/data/datasource/beacon/beacon_manager.dart';
 import 'package:science_hall/data/datasource/local/device_info_provider.dart';
 import 'package:science_hall/di_container.dart';
-import 'package:science_hall/domain/repository/science_repository.dart';
 import 'package:science_hall/presentation/base/viewmodel_interface.dart';
 import 'package:science_hall/presentation/location/location_provider.dart';
 import 'package:science_hall/util/dev_log.dart';
 
 class LocationViewModel implements ViewModelInterface{
 
-  final scienceRepository = it<ScienceRepository>();
+  final _beaconManager = it<BeaconManager>();
   final viewState = ArcSubject<LocationState>(seed : LocationState(isLoading: true, location: null));
   var locationState = LocationState(isLoading: true, location: null);
+
 
   @override
   disposeAll() {
@@ -22,6 +23,15 @@ class LocationViewModel implements ViewModelInterface{
     Log.i("LoginViewModel loadState $state");
     state = state as LocationState;
     viewState.val = state;
+  }
+
+
+
+  void beaconSubscription(){
+    _beaconManager.beaconState.stream.listen((event) async {
+       Log.d("::::[beaconSubscription] ${event.toString()}");
+       await fetchLatestPlace();
+    });
   }
 
   Future<void> fetchLatestPlace() async{
@@ -40,5 +50,7 @@ class LocationViewModel implements ViewModelInterface{
    }
    loadState(locationState);
   }
+
+
 
 }
