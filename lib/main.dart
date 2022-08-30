@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:science_hall/data/datasource/remote/mock_data_store.dart';
@@ -19,6 +20,7 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     MockDataStore(context);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     final theme = ref.watch(appThemeProvider);
     final themeMode = ref.watch(appThemeModeProvider);
     final appRouter = ref.watch(appRouterProvider);

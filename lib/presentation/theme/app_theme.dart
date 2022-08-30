@@ -12,7 +12,7 @@ final appRouterProvider = Provider<AppRouter>((ref) {
 });
 final appThemeModeProvider = StateNotifierProvider<
     StateController<ThemeMode>,
-    ThemeMode>((ref) => StateController(ThemeMode.light),);
+    ThemeMode>((ref) => StateController(ThemeMode.light));
 
 final appThemeProvider = Provider<AppTheme>(
       (ref) {
