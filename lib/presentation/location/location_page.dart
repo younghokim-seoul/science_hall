@@ -56,8 +56,6 @@ class _LocationPageState extends ConsumerState<LocationPage> {
         child: Container(
           child: locationViewModel.viewState.ui(
             builder: (context, event) {
-
-              Log.d("event " + event.data.toString());
               if (!event.hasData || event.data.isNullOrEmpty || event.error != null) return Container();
 
               if(event.data!.location.isNullOrEmpty) return Container();

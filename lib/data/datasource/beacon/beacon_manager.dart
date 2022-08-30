@@ -11,7 +11,6 @@ import 'package:science_hall/domain/repository/science_repository.dart';
 import 'package:science_hall/util/dev_log.dart';
 
 class BeaconManager {
-
   final _scienceRepository = it<ScienceRepository>();
 
   var bluetoothState = BluetoothState.stateOff;
@@ -22,11 +21,11 @@ class BeaconManager {
 
   final beaconState = ArcSubject<RangingResult>();
 
-  bool get bluetoothEnabled => bluetoothState.value == BluetoothState.stateOn;
+  bool get bluetoothEnabled => bluetoothState.value.toString() == BluetoothState.stateOn.toString();
 
   bool get authorizationStatusOk =>
-      authorizationStatus.value == AuthorizationStatus.allowed ||
-      authorizationStatus.value == AuthorizationStatus.always;
+      authorizationStatus.value.toString() == AuthorizationStatus.allowed.toString() ||
+      authorizationStatus.value.toString() == AuthorizationStatus.always.toString();
 
   bool get locationServiceEnabled => locationService;
 
@@ -94,27 +93,30 @@ class BeaconManager {
     bluetoothState = await flutterBeacon.bluetoothState;
     authorizationStatus = await flutterBeacon.authorizationStatus;
     locationService = await flutterBeacon.checkLocationServicesIfEnabled;
-    Log.d(":::bluetoothState $bluetoothState authorizationStatus $authorizationStatus locationServiceEnabled $locationServiceEnabled");
 
-    bool isReady = bluetoothEnabled && authorizationStatusOk && locationServiceEnabled;
-    await startScan(isReady);
+
+    if(!bluetoothEnabled || !authorizationStatusOk || !locationServiceEnabled){
+      Log.d(":::bluetoothEnabled $bluetoothEnabled authorizationStatusOk $authorizationStatusOk locationServiceEnabled $locationServiceEnabled");
+      return;
+    }
+    await startScan();
   }
 
-  Future<void> startScan(bool isReady) async {
+  Future<void> startScan() async {
     Log.d("::::SCANING....");
     if (_subscription != null) {
-      Log.d("::::PUASE 체크......");
-      if (_subscription!.isPaused) {
-        Log.d("::::RESUME 체크......");
-        return;
-      }
+      Log.d("::::이미 비콘 동작중.......");
+      return;
     }
 
     Log.d("::::regions size " + regions.length.toString());
-    _subscription = flutterBeacon.ranging(regions).listen((RangingResult result) async {
+    _subscription =
+        flutterBeacon.ranging(regions).listen((RangingResult result) async {
       if (!result.beacons.isNullOrEmpty) {
         int rssi = result.beacons.first.rssi;
-        if (rssi.abs() >= 35 && rssi.abs() <= 99 && result.beacons.length == 1) {
+        if (rssi.abs() >= 35 &&
+            rssi.abs() <= 99 &&
+            result.beacons.length == 1) {
           String latestUUID = await getBeaconUUID();
           if (latestUUID != result.beacons.first.proximityUUID) {
             //가장 최근 uuid와 감지된 비콘 uuid가 다르다면?
@@ -128,7 +130,6 @@ class BeaconManager {
               beaconState.val = result;
             }
           }
-
         }
       }
     });
@@ -140,7 +141,6 @@ class BeaconManager {
     await _subscription?.cancel();
     _subscription = null;
   }
-
 
   Future<void> _dispose() async {
     Log.d('dispose');
@@ -162,7 +162,7 @@ class BeaconManager {
       param['uuid'] = macUuid;
       final response = await _scienceRepository.fetchExhibition(param);
       await saveLatestExhibition(response);
-    } catch (e,print) {
+    } catch (e, print) {
       Log.d(":::[fetchBeacon error]  " + print.toString());
     }
   }
@@ -176,13 +176,11 @@ class BeaconManager {
         param['sex'] = userInfo.sex;
         param['age_group'] = userInfo.age_group;
         param['mac_address'] = userInfo.mac_address;
-        await _scienceRepository.saveUserLog(uuid,param);
+        await _scienceRepository.saveUserLog(uuid, param);
       }
-    } catch (e,print) {
-      Log.d(":::[saveUserLog error]  "  + e.toString());
+    } catch (e, print) {
+      Log.d(":::[saveUserLog error]  " + e.toString());
       Log.d(":::[saveUserLog error]  " + print.toString());
     }
   }
-
-
 }

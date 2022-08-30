@@ -36,8 +36,7 @@ class _HomePageState extends ConsumerState<HomePage>
     Log.d('AppLifecycleState = $state');
 
     if (state == AppLifecycleState.resumed) {
-      var check = await checkPermission();
-      if (check) beaconManger.check();
+        beaconManger.check();
     } else if (state == AppLifecycleState.paused) {
       await beaconManger.pauseScanBeacon();
     }
