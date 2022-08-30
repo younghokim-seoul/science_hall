@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:science_hall/presentation/theme/app_colors.dart';
@@ -40,6 +41,7 @@ class AppTheme {
     const mode = ThemeMode.light;
     final appColors = AppColors.light();
     final themeData = ThemeData.light().copyWith(
+      appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.dark),
       scaffoldBackgroundColor: appColors.background,
       textTheme: GoogleFonts.notoSansTextTheme(ThemeData
           .light()
@@ -61,6 +63,7 @@ class AppTheme {
     const mode = ThemeMode.dark;
     final appColors = AppColors.dark();
     final themeData = ThemeData.dark().copyWith(
+      appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light,),
       scaffoldBackgroundColor: appColors.background,
       textTheme: GoogleFonts.notoSansTextTheme(ThemeData
           .dark()

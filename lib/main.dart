@@ -20,7 +20,6 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     MockDataStore(context);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     final theme = ref.watch(appThemeProvider);
     final themeMode = ref.watch(appThemeModeProvider);
     final appRouter = ref.watch(appRouterProvider);
