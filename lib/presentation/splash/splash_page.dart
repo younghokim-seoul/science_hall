@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:science_hall/gen/assets.gen.dart';
 import 'package:science_hall/route/app_route.dart';
-import 'package:science_hall/util/dev_log.dart';
+
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -13,14 +15,15 @@ class SplashPage extends ConsumerStatefulWidget {
 }
 
 class _SplashPageState extends ConsumerState<SplashPage> {
+
   @override
   initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 1500), () {
-      Log.d(":::: 스플래쉬 화면 종료");
       context.router.pushAndPopUntil(const MainRoute(), predicate: (route) => false);
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
