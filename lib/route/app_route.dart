@@ -14,15 +14,20 @@ import 'package:science_hall/presentation/location/location_page.dart';
 import 'package:science_hall/presentation/main/main_page.dart';
 import 'package:science_hall/presentation/preview/preview_page.dart';
 import 'package:science_hall/presentation/signup/signup_page.dart';
+import 'package:science_hall/presentation/splash/splash_page.dart';
 export 'app_route.gr.dart';
 
 @CupertinoAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(
-      path: '/',
-      page: MainPage,
+      path: '/splash',
+      page: SplashPage,
       initial: true,
+    ),
+    AutoRoute(
+      path: '/main',
+      page: MainPage,
       children: <AutoRoute>[
         AutoRoute(
           path: 'home',

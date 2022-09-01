@@ -214,6 +214,14 @@ class $AssetsImagesGen {
   AssetGenImage get locationTrans03 =>
       const AssetGenImage('assets/images/location_trans03.png');
 
+  /// File path: assets/images/logo_lockup_flutter_vertical.png
+  AssetGenImage get logoLockupFlutterVertical =>
+      const AssetGenImage('assets/images/logo_lockup_flutter_vertical.png');
+
+  /// File path: assets/images/logo_lockup_flutter_vertical_wht.png
+  AssetGenImage get logoLockupFlutterVerticalWht =>
+      const AssetGenImage('assets/images/logo_lockup_flutter_vertical_wht.png');
+
   /// File path: assets/images/main-logo.png
   AssetGenImage get mainLogo =>
       const AssetGenImage('assets/images/main-logo.png');
@@ -255,6 +263,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/right-arrow.png
   AssetGenImage get rightArrow =>
       const AssetGenImage('assets/images/right-arrow.png');
+
+  /// File path: assets/images/splash_icon.png
+  AssetGenImage get splashIcon =>
+      const AssetGenImage('assets/images/splash_icon.png');
 
   /// File path: assets/images/whale_sea.jpg
   AssetGenImage get whaleSea =>
