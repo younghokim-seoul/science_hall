@@ -115,21 +115,22 @@ class BeaconManager {
       if (!result.beacons.isNullOrEmpty) {
         int rssi = result.beacons.first.rssi;
         if (rssi.abs() >= 35 &&
-            rssi.abs() <= 99 &&
+            rssi.abs() <= 75 &&
             result.beacons.length == 1) {
-          String latestUUID = await getBeaconUUID();
-          if (latestUUID != result.beacons.first.proximityUUID) {
+          var latestUUID = await getBeaconUUID();
+          // if (latestUUID != result.beacons.first.proximityUUID) {
             //가장 최근 uuid와 감지된 비콘 uuid가 다르다면?
             // Log.d("가장 최근 uuid와 감지된 비콘 uuid가 다르다면?");
             if (!result.beacons.first.proximityUUID.isNullOrEmpty) {
               //비콘에 포함된 proximityUUID가 null이 아니라면?
               // Log.d("비콘에 포함된 proximityUUID가 null이 아니라면? => 비콘 정보저장 및 비콘 정보호출");
-              await saveBeaconUUID(result.beacons.first.proximityUUID);
+
+              await saveBeaconUUID(result.beacons.first.proximityUUID,result.beacons.first.major,result.beacons.first.minor);
               await fetchBeacon();
-              await saveUserLog(result.beacons.first.proximityUUID);
+              await saveUserLog("${result.beacons.first.proximityUUID}:${result.beacons.first.major}:${result.beacons.first.minor}");
               beaconState.val = result;
             }
-          }
+          // }
         }
       }
     });
@@ -157,11 +158,14 @@ class BeaconManager {
 
   Future<void> fetchBeacon() async {
     try {
-      String macUuid = await getBeaconUUID();
-      Map<String, dynamic> param = {};
-      param['uuid'] = macUuid;
-      final response = await _scienceRepository.fetchExhibition(param);
-      await saveLatestExhibition(response);
+      var localBeacon = await getBeaconUUID();
+
+      if(localBeacon != null){
+        Map<String, dynamic> param = {};
+        param['uuid'] = "${localBeacon.uuid}:${localBeacon.major}:${localBeacon.minor}";
+        final response = await _scienceRepository.fetchExhibition(param);
+        await saveLatestExhibition(response);
+      }
     } catch (e, print) {
       Log.d(":::[fetchBeacon error]  " + print.toString());
     }

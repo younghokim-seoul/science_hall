@@ -3,7 +3,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:science_hall/data/datasource/local/save_beacon_provider.dart';
 import 'package:science_hall/gen/assets.gen.dart';
 import 'package:science_hall/presentation/theme/app_theme.dart';
 import 'package:science_hall/route/app_route.dart';
@@ -112,7 +111,6 @@ class MainPage extends ConsumerWidget {
       return false;
     }
 
-    await clearVisited();
 
     return true;
   }
