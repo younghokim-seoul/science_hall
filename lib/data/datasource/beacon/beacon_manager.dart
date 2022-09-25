@@ -21,69 +21,83 @@ class BeaconManager {
 
   final beaconState = ArcSubject<RangingResult>();
 
-  bool get bluetoothEnabled => bluetoothState.value.toString() == BluetoothState.stateOn.toString();
+  bool get bluetoothEnabled =>
+      bluetoothState.value.toString() == BluetoothState.stateOn.toString();
 
   bool get authorizationStatusOk =>
-      authorizationStatus.value.toString() == AuthorizationStatus.allowed.toString() ||
-      authorizationStatus.value.toString() == AuthorizationStatus.always.toString();
+      authorizationStatus.value.toString() ==
+          AuthorizationStatus.allowed.toString() ||
+      authorizationStatus.value.toString() ==
+          AuthorizationStatus.always.toString();
 
   bool get locationServiceEnabled => locationService;
 
   final regions = <Region>[
     Region(
         identifier: 'Bluno',
-        proximityUUID: 'e2c56db5-dffb-48d2-b060-d0f5a71096e0'),
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2030,
+        minor: 26),
     Region(
-        identifier: 'Bluno1',
-        proximityUUID: '5B52B68D-C273-4205-03BB-DDF62A9134BE'),
+        identifier: 'Bluno',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2049,
+        minor: 28),
     Region(
-        identifier: 'Bluno2',
-        proximityUUID: '4D8261F3-57BF-F2B8-0261-A5C381287DF9'),
+        identifier: 'Bluno',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2032,
+        minor: 26),
     Region(
-        identifier: 'Bluno3',
-        proximityUUID: '056852CC-5974-1291-C374-0953C2DEBD21'),
+        identifier: 'BlunoV1.8',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2056,
+        minor: 28),
     Region(
-        identifier: 'Bluno4',
-        proximityUUID: '5B35932A-9E21-DFB4-8CE9-F65CBC0A98C1'),
+        identifier: 'BlunoV1.8',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2036,
+        minor: 26),
     Region(
-        identifier: 'Bluno5',
-        proximityUUID: 'ECABB2AB-9201-0A51-97BF-C3D62BFE32DF'),
+        identifier: 'BlunoV1.8',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 0,
+        minor: 0),
     Region(
-        identifier: 'Bluno6',
-        proximityUUID: 'A54B96F3-C095-BA60-0F26-F4A9B5045A7B'),
+        identifier: 'Bluno',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2026,
+        minor: 27),
     Region(
-        identifier: 'Bluno7',
-        proximityUUID: '7E4834C0-F223-234F-D023-63CA7782F0E7'),
+        identifier: 'Bluno',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2036,
+        minor: 25),
     Region(
-        identifier: 'Bluno8',
-        proximityUUID: 'BE2F1E22-C30E-8ACB-B7BA-92D39F26439F'),
+        identifier: 'BlunoV1.8',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2036,
+        minor: 27),
     Region(
-        identifier: 'Bluno9',
-        proximityUUID: 'FF671CDE-7896-69D0-3A8E-0235093B440F'),
+        identifier: 'BlunoV1.8',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2023,
+        minor: 26),
     Region(
-        identifier: 'Bluno10',
-        proximityUUID: '6FF7E5C3-6C5C-5775-8015-A72ADC24D541'),
+        identifier: 'Bluno',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2051,
+        minor: 26),
     Region(
-        identifier: 'Bluno11',
-        proximityUUID: 'CECD03BD-AFE7-239E-BB1A-C6D07FB1B51F'),
+        identifier: 'Bluno',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 8083,
+        minor: 80),
     Region(
-        identifier: 'Bluno12',
-        proximityUUID: '44A9B6BA-99B9-E684-2E60-D5DFBE14F67B'),
-    Region(
-        identifier: 'Bluno13',
-        proximityUUID: '75C216E2-36FD-8ACB-6BD0-75DF8378FD92'),
-    Region(
-        identifier: 'Bluno14',
-        proximityUUID: '2C682F04-12E3-F67C-2D14-2380D153A3C2'),
-    Region(
-        identifier: 'Bluno15',
-        proximityUUID: 'C0FD1183-8CA3-4A0E-27E0-059127EFA23A'),
-    Region(
-        identifier: 'Bluno16',
-        proximityUUID: 'BEF4FA04-445C-97B9-A0CC-8C12ACE53988'),
-    Region(
-        identifier: 'Bluno17',
-        proximityUUID: 'BBE66A0F-28D1-BEF9-0B55-0572687C6FCA'),
+        identifier: 'BlunoV1.8',
+        proximityUUID: 'E2C56DB5-DFFB-48D2-B060-D0F5A71096E0',
+        major: 2022,
+        minor: 25),
   ];
 
   Future<void> initScanBeacon() async => await flutterBeacon.initializeScanning;
@@ -94,9 +108,11 @@ class BeaconManager {
     authorizationStatus = await flutterBeacon.authorizationStatus;
     locationService = await flutterBeacon.checkLocationServicesIfEnabled;
 
-
-    if(!bluetoothEnabled || !authorizationStatusOk || !locationServiceEnabled){
-      Log.d(":::bluetoothEnabled $bluetoothEnabled authorizationStatusOk $authorizationStatusOk locationServiceEnabled $locationServiceEnabled");
+    if (!bluetoothEnabled ||
+        !authorizationStatusOk ||
+        !locationServiceEnabled) {
+      Log.d(
+          ":::bluetoothEnabled $bluetoothEnabled authorizationStatusOk $authorizationStatusOk locationServiceEnabled $locationServiceEnabled");
       return;
     }
     await startScan();
@@ -119,17 +135,19 @@ class BeaconManager {
             result.beacons.length == 1) {
           var latestUUID = await getBeaconUUID();
           // if (latestUUID != result.beacons.first.proximityUUID) {
-            //가장 최근 uuid와 감지된 비콘 uuid가 다르다면?
-            // Log.d("가장 최근 uuid와 감지된 비콘 uuid가 다르다면?");
-            if (!result.beacons.first.proximityUUID.isNullOrEmpty) {
-              //비콘에 포함된 proximityUUID가 null이 아니라면?
-              // Log.d("비콘에 포함된 proximityUUID가 null이 아니라면? => 비콘 정보저장 및 비콘 정보호출");
+          //가장 최근 uuid와 감지된 비콘 uuid가 다르다면?
+          // Log.d("가장 최근 uuid와 감지된 비콘 uuid가 다르다면?");
+          if (!result.beacons.first.proximityUUID.isNullOrEmpty) {
+            //비콘에 포함된 proximityUUID가 null이 아니라면?
+            // Log.d("비콘에 포함된 proximityUUID가 null이 아니라면? => 비콘 정보저장 및 비콘 정보호출");
 
-              await saveBeaconUUID(result.beacons.first.proximityUUID,result.beacons.first.major,result.beacons.first.minor);
-              await fetchBeacon();
-              await saveUserLog("${result.beacons.first.proximityUUID}:${result.beacons.first.major}:${result.beacons.first.minor}");
-              beaconState.val = result;
-            }
+            await saveBeaconUUID(result.beacons.first.proximityUUID,
+                result.beacons.first.major, result.beacons.first.minor);
+            await fetchBeacon();
+            await saveUserLog(
+                "${result.beacons.first.proximityUUID}:${result.beacons.first.major}:${result.beacons.first.minor}");
+            beaconState.val = result;
+          }
           // }
         }
       }
@@ -160,9 +178,10 @@ class BeaconManager {
     try {
       var localBeacon = await getBeaconUUID();
 
-      if(localBeacon != null){
+      if (localBeacon != null) {
         Map<String, dynamic> param = {};
-        param['uuid'] = "${localBeacon.uuid}:${localBeacon.major}:${localBeacon.minor}";
+        param['uuid'] =
+            "${localBeacon.uuid}:${localBeacon.major}:${localBeacon.minor}";
         final response = await _scienceRepository.fetchExhibition(param);
         await saveLatestExhibition(response);
       }
